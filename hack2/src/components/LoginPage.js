@@ -4,8 +4,17 @@ import { SlMenuItem } from '@shoelace-style/shoelace/dist/react';
 import { SlTextarea } from '@shoelace-style/shoelace/dist/react';
 import { SlCheckbox } from '@shoelace-style/shoelace/dist/react';
 import { SlButton } from '@shoelace-style/shoelace/dist/react';
-import { useRef } from 'react';
+import { useRef, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+import AuthContext from './AuthContext';
+
+import { SlDivider } from '@shoelace-style/shoelace/dist/react';
+
+// import css
+import './LoginPage.css';
+
+//add bootstrap button
+import { Button } from 'react-bootstrap';
 
 // sweetalert
 import Swal from 'sweetalert2';
@@ -17,8 +26,9 @@ const Login = () => {
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
 
+    const authContext = useContext(AuthContext);
 
-    const handleSubmit = (e) => {   
+    const handleSubmit = (e) => {
         e.preventDefault();
         const email = emailInputRef.current.value;
         const password = passwordInputRef.current.value;
@@ -35,56 +45,65 @@ const Login = () => {
             },
             body: JSON.stringify(user)
         })
-        // catch errors
-        
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-            if (data.message) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: data.message,
-                })
-            } else {
+            .then(res => {
+
+                if (res.ok) {
+                    console.log(res);
+
+                    return res.json()
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: res.message,
+                    })
+                    throw new Error('Something went wrong');
+                }
+            })
+            .then(data => {
+                console.log(data);
+
                 Swal.fire({
                     icon: 'success',
                     title: 'Success',
                     text: 'You have successfully logged in!',
+                }).then(() => {
+                    console.log(data.user.id, data.user.name)
+                    authContext.onLogin(data.user.id, data.user.name);
+                    // console.log(authContext);
+                    // window.location.href = '/home';
                 })
-                window.location.href = '/';
-            }
-        }
-
-        )
+            })
+            .catch(err => {
+                console.log(err);
+            })
 
     }
-    return (
-        <Container className='d-flex align-items-center justify-content-center flex-column' style={{ minHeight: '100vh' }}>
-            <h1>Login</h1>
-            <form onSubmit={handleSubmit}>
-                <SlInput email="email" label="Email" required pill ref={emailInputRef}/>
-                <SlInput password="password" label="Pasword" required pill ref={passwordInputRef}/>
-                <br />
-                {/* <SlSelect label="Favorite Animal" clearable required>
-                    <SlMenuItem value="birds">Birds</SlMenuItem>
-                    <SlMenuItem value="cats">Cats</SlMenuItem>
-                    <SlMenuItem value="dogs">Dogs</SlMenuItem>
-                    <SlMenuItem value="other">Other</SlMenuItem>
-                </SlSelect>
-                <br />
-                <SlTextarea name="comment" label="Comment" required></SlTextarea>
-                <br />
-                <SlCheckbox required>Check me before submitting</SlCheckbox>
-                <br />
-                <br /> */}
-                <SlButton type="submit" variant="primary">
-                    Submit
-                </SlButton>
-            </form>
-            <p>Don't have an account? <NavLink to='/register'>Register</NavLink></p>
 
-        </Container>
+    return (
+        <>
+            <div className='box1'>
+            </div>
+
+            <div className='box2'>
+            </div>
+
+            <Container className='d-flex align-items-center justify-content-center flex-column' style={{ minHeight: '100vh' }}>
+                <div className='form-container'>
+                    <h1>Login</h1>
+                    <form onSubmit={handleSubmit}>
+                        <SlInput email="email" label="Email" required ref={emailInputRef} />
+                        <SlInput password="password" label="Pasword" required ref={passwordInputRef} />
+                        <br />
+                        <Button variant="primary" type="submit">
+                            Submit
+                        </Button>
+                    </form>
+                    <SlDivider></SlDivider>
+                    <p className='p-faded'>Don't have an account? <NavLink to='/register'>Register</NavLink></p>
+                </div>
+            </Container>
+        </>
     );
 }
 

@@ -1,0 +1,33 @@
+.form-container {
+  background-color: rgb(255, 255, 255);
+  padding: 16px;
+  border-radius: 4px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.box1 {
+  background: radial-gradient(at top right, #6dfc8d, #fff, #fff);
+  animation: gradient 15s ease infinite;
+  height: 100vh;
+  width: 100vw;
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.box2 {
+  background: radial-gradient(at top left, #33ceff, #fff, #fff);
+  animation: gradient 15s ease infinite;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -3;
+}
+
+.p-faded {
+    color: #6c757d;
+}

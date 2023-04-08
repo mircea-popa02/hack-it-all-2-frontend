@@ -2,8 +2,8 @@
   position: fixed;
   bottom: 64px;
   right: 0 !important;
-  width: 300px !important;
-  max-height: 400px !important;
+  width: 350px !important;
+  max-height: 700px !important;
   overflow-y: scroll;
   padding: 16px !important;
   margin-top: 5vh;
@@ -20,4 +20,32 @@
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 
+}
+
+.buttons {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    
+    padding-bottom: 8px !important;
+}
+
+.buttons .option {
+    background-color: #212529;
+    color: white;
+    padding: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    border-radius: 16px;
+    margin-right: 8px;
+    transition: 0.2s;
+    font-weight: 300;
+    margin-bottom: 16px;
+}
+
+.buttons .option:hover {
+    background-color: #e4e4e4;
+    color: black;
+    cursor: pointer;
+    transition: 0.2s;
 }

@@ -13,6 +13,8 @@ import { Button } from 'react-bootstrap';
 import { Container } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 
+import Footer from "./Footer"
+
 const Register = () => {
     const nameInputRef = useRef();
     const emailInputRef = useRef();
@@ -64,11 +66,6 @@ const Register = () => {
     }
     return (
         <>
-            <div className='box1'>
-            </div>
-
-            <div className='box2'>
-            </div>
             <Container className='d-flex align-items-center justify-content-center flex-column' style={{ minHeight: '100vh' }}>
                 <div className='form-container'>
                     <h1>Register</h1>
@@ -86,6 +83,7 @@ const Register = () => {
 
                 </div>
             </Container>
+            <Footer/>
         </>
     );
 }

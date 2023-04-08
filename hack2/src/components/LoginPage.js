@@ -12,6 +12,7 @@ import { SlDivider } from '@shoelace-style/shoelace/dist/react';
 
 // import css
 import './LoginPage.css';
+import Footer from './Footer'
 
 //add bootstrap button
 import { Button } from 'react-bootstrap';
@@ -81,11 +82,7 @@ const Login = () => {
 
     return (
         <>
-            <div className='box1'>
-            </div>
-
-            <div className='box2'>
-            </div>
+            
 
             <Container className='d-flex align-items-center justify-content-center flex-column' style={{ minHeight: '100vh' }}>
                 <div className='form-container'>
@@ -102,6 +99,7 @@ const Login = () => {
                     <p className='p-faded'>Don't have an account? <NavLink to='/register'>Register</NavLink></p>
                 </div>
             </Container>
+            <Footer />
         </>
     );
 }

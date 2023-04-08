@@ -7,7 +7,7 @@ const AppNavbar = () => {
         <>
         <Navbar bg="light" expand="lg">
             <Container>
-                <Navbar.Brand href="/">StudFinance</Navbar.Brand>
+                <Navbar.Brand href="/">Fintech</Navbar.Brand>
 
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">

@@ -86,6 +86,8 @@ const Home = () => {
                 console.log(err);
             })
 
+        
+
     }, [])
 
 
@@ -137,6 +139,8 @@ const Home = () => {
                 <h1 className='headline'>Total Balance</h1>
                 <h2 className='user-name'>{balance} <p className=''> RON</p></h2>
 
+                <span></span>
+
                 <div className='d-flex button-container align-items-center justify-content-around'>
                     <div className='group-button d-flex flex-column align-items-center'>
                         <div className='round-button d-flex'>
@@ -161,8 +165,6 @@ const Home = () => {
                 </div>
 
 
-
-
             <h1 className='headline'>Recent transactions</h1>
 
             {/* sorting expenses by date */}
@@ -171,6 +173,7 @@ const Home = () => {
                 <div className='expense card-container' key={expense._id}>
                     <h3>-{expense.value}</h3>
                     <p>{expense.description}</p>
+                    <p>{expense.type}</p>
                     <SlFormatDate date={expense.date} />
                 </div>
             ))}

@@ -7,13 +7,125 @@ import { Container } from 'react-bootstrap';
 
 //import css
 import './Chat.css';
+import { useEffect } from 'react';
+import userEvent from '@testing-library/user-event';
 
 const ChatGPT = () => {
     const [messages, setMessages] = useState([]);
 
     const [inputs, setInput] = useState("");
 
+    const [incomes, setIncome] = useState([]);
+    const [expenses, setExpenses] = useState([]);
+
+    const [accountLimit, setAccountLimit] = useState(0);
+
+    const [balance, setBalance] = useState(0);
+
     const input = useRef();
+
+    useEffect(() => {
+        fetch('http://localhost:5000/api/users/ceva/' + localStorage.getItem('nume'))
+
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                setAccountLimit(data.user.accountlimit);
+                setBalance(data.user.balance);
+                var url = 'http://localhost:5000/api/payments/ceva/';
+
+                url += localStorage.getItem('token');
+
+
+                fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                })
+                    .then(res => {
+                        if (res.ok) {
+                            return res.json();
+                        } else {
+                            throw new Error('Something went wrong');
+                        }
+                    }
+                    )
+                    .then(data => {
+                        console.log(data);
+                        setIncome(data.incomes);
+                        setExpenses(data.expenses);
+                    }
+                    )
+                    .catch(err => {
+                        console.log(err);
+                    })
+            })
+    }, []);
+
+    const getAdvice = () => {
+
+        let advice = 'Here are my spendings in RON: ';
+        for (let i = 0; i < expenses.length; i++) {
+            advice += expenses[i].type + ' ' + expenses[i].value + ', ';
+        }
+
+        advice += 'Here are my incomes in RON: ';
+        for (let i = 0; i < incomes.length; i++) {
+            advice += incomes[i].type + ' ' + incomes[i].value + ', ';
+        }
+
+        advice += 'My current balance is: ' + balance + " ";
+
+        advice += 'My budget is: ' + accountLimit + " ";
+
+        advice += 'What can I do to improve my finances based on my current situation?';
+
+        setMessages([...messages, advice]);
+
+        const data = {
+            data: advice,
+        }
+        console.log(data);
+
+        fetch("http://localhost:5000/api/chat/", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+
+                setMessages(prev =>
+                    [...prev, data.content]);
+            }
+            )
+    }
+
+    const getJoke = () => {
+        const data = {
+            data: 'Tell me a joke',
+        }
+        // setMessages([...messages, input.current.value]);
+        fetch("http://localhost:5000/api/chat/", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+
+                setMessages(prev =>
+                    [...prev, data.content]);
+            })
+    }
+
 
     const sendMessage = (e) => {
         e.preventDefault();
@@ -43,6 +155,14 @@ const ChatGPT = () => {
     return (
         <Container className="chat">
             <h1 className="headline">Chat with GPT-3.5</h1>
+            <div className='buttons'>
+                <div className='option' onClick={getAdvice}>
+                    financial tips
+                </div>
+                <div className='option' onClick={getJoke}>
+                    random joke
+                </div>
+            </div>
             <div className="messages">
                 {messages.map((message, index) => (
                     <div key={index} className="message">
@@ -73,7 +193,7 @@ const Chat = () => {
 
     return (
         <>
-        {openchat ? <><ChatGPT /><Button className="open-chat" onClick={changeVisibility}>Close Chat</Button></> : <Button className="open-chat" onClick={changeVisibility} id='drawer'>
+            {openchat ? <><ChatGPT /><Button className="open-chat" onClick={changeVisibility}>Close chat</Button></> : <Button className="open-chat" onClick={changeVisibility} id='drawer'>
                 Open chat
             </Button>}
         </>

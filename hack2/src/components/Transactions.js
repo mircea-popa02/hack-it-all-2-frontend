@@ -2,11 +2,12 @@
 import { Container } from 'react-bootstrap';
 import { SlInput } from '@shoelace-style/shoelace/dist/react';
 import Swal from 'sweetalert2';
-import { useReducer, useRef, useState } from 'react';
+import { useEffect, useReducer, useRef, useState } from 'react';
 
 import { SlSelect } from '@shoelace-style/shoelace/dist/react';
 
 import AuthContext from './AuthContext';
+import Footer from './Footer';
 
 import { SlOption } from '@shoelace-style/shoelace/dist/react';
 import { useContext } from 'react';
@@ -22,6 +23,35 @@ const Transactions = () => {
     const description = useRef();
     const type = useRef();
     const authContext = useContext(AuthContext);
+
+    const [balance, setBalance] = useState(0);
+    useEffect(() => {
+        var url = "http://localhost:5000/api/users/ceva/" + localStorage.getItem('nume');
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+
+            .then(res => {
+                if (res.ok) {
+                    return res.json();
+                } else {
+                    throw new Error('Something went wrong');
+                }
+            }
+            )
+            .then(data => {
+                console.log(data);
+                setBalance(data.user.balance);
+            }
+            )
+            .catch(err => {
+                console.log(err);
+            })
+    }, [])
+
 
 
     const sendMoney = (e) => {
@@ -101,21 +131,18 @@ const Transactions = () => {
         <>
             <AppNavbar />
 
-            <div className='box1'>
-            </div>
-
-            <div className='box2'>
-            </div>
-
             <Container className='home-container'>
-                <h1 >Transactions</h1>
-                <br></br>
+                <h1 className='headline'>Transactions</h1>
+                <h2 className='user-name'>{balance} RON</h2>
+                <span>Send money to any user</span>
+
+                <div className='form-container'>
                 <form onSubmit={sendMoney}>
-                    <SlInput placeholder="Send to" ref={name} clearable />
+                    <SlInput  ref={name} clearable label="Consignee" help-text="Who would you like to send money to?"/>
                     <br />
-                    <SlInput placeholder="Amount" ref={amount} clearable />
+                    <SlInput  ref={amount} clearable label="Amount (RON)" help-text="How much money would you like to send?"/>
                     <br />
-                    <SlInput placeholder="Description" ref={description} clearable />
+                    <SlInput  ref={description} clearable label="Description" help-text="What is the purpose of this transaction?"/>
                     <br />
                     <Form.Select aria-label="Default select example" ref={type}> 
                         <option>Transaction type</option>
@@ -131,7 +158,9 @@ const Transactions = () => {
                         Submit
                     </Button>
                 </form>
+                </div>
             </Container >
+            <Footer />
         </>
     )
 }

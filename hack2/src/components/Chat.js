@@ -42,9 +42,8 @@ const ChatGPT = () => {
 
     return (
         <Container className="chat">
-            <h1 className="title">Chat with GPT-3</h1>
+            <h1 className="headline">Chat with GPT-3.5</h1>
             <div className="messages">
-
                 {messages.map((message, index) => (
                     <div key={index} className="message">
                         <p>{message}</p>

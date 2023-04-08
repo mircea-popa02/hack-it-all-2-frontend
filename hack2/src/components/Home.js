@@ -14,6 +14,8 @@ import { SlFormatDate } from '@shoelace-style/shoelace/dist/react';
 
 import Chat from './Chat';
 
+import Footer from './Footer';
+
 import Graph from './Graph';
 
 import { SlDetails } from '@shoelace-style/shoelace/dist/react';
@@ -117,48 +119,72 @@ const Home = () => {
     return (
         <>
             <AppNavbar />
-            <div className='box1'>
+            {/* <div className='box1'>
             </div>
 
             <div className='box2'>
-            </div>
+            </div> */}
 
             <Chat />
             <Container className='home-container'>
                 {authContext.isLoggedIn && (
                     <>
-                        <h1 className='headline'>Welcome,</h1>
-                        <h2 className='user-name'>{localStorage.getItem('nume')}</h2>
+                        <span>Welcome, {localStorage.getItem('nume')}</span>
                     </>
                 )}
-                <h3>Balance: {balance} RON</h3>
-            </Container>
 
 
+                <h1 className='headline'>Total Balance</h1>
+                <h2 className='user-name'>{balance} <p className=''> RON</p></h2>
 
-            <Container className='home-container'>
-                <h1 className='headline'>Recent transactions</h1>
-
-
-                {/* sorting expenses by date */}
-
-                {expenses.map((expense) => (
-                    <div className='expense card-container' key={expense._id}>
-                        <h3>-{expense.value}</h3>
-                        <p>{expense.description}</p>
-                        <SlFormatDate date={expense.date} />
+                <div className='d-flex button-container align-items-center justify-content-around'>
+                    <div className='group-button d-flex flex-column align-items-center'>
+                        <div className='round-button d-flex'>
+                            <sl-icon name="plus" size="large" />
+                        </div>
+                        <p>Add</p>
                     </div>
-                ))}
 
-                {incomes.map((income) => (
-                    <div className='income card-container' key={income._id}>
-                        <h3>+{income.value} </h3>
-                        <p>{income.description}</p>
-                        <SlFormatDate date={income.date} />
+                    <div className='group-button d-flex flex-column align-items-center'>
+                        <div className='round-button d-flex'>
+                            <sl-icon name="arrow-up-right"></sl-icon>
+                        </div>
+                        <p>Send</p>
                     </div>
-                ))}
 
-            </Container>
+                    <div className='group-button d-flex flex-column align-items-center'>
+                        <div className='round-button d-flex'>
+                            <sl-icon name="arrow-bar-down"></sl-icon>
+                        </div>
+                        <p>Statistics</p>
+                    </div>
+                </div>
+
+
+
+
+            <h1 className='headline'>Recent transactions</h1>
+
+            {/* sorting expenses by date */}
+
+            {expenses.map((expense) => (
+                <div className='expense card-container' key={expense._id}>
+                    <h3>-{expense.value}</h3>
+                    <p>{expense.description}</p>
+                    <SlFormatDate date={expense.date} />
+                </div>
+            ))}
+
+            {incomes.map((income) => (
+                <div className='income card-container' key={income._id}>
+                    <h3>+{income.value} </h3>
+                    <p>{income.description}</p>
+                    <SlFormatDate date={income.date} />
+                </div>
+            ))}
+
+        </Container >
+        <Footer />
         </>
 
     );

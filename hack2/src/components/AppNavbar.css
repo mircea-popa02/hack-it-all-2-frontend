@@ -1,22 +1,79 @@
 .box1 {
-    background: radial-gradient(at top right, #6dfc8d, #fff, #fff);
-    animation: gradient 15s ease infinite;
-    height: 100vh;
-    width: 100vw;
-    opacity: 0.6;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-  }
-  
-  .box2 {
-    background: radial-gradient(at top left, #33ceff, #fff, #fff);
-    animation: gradient 15s ease infinite;
-    height: 100vh;
-    width: 100vw;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -3;
-  }
+  background: radial-gradient(at top right, #6dfc8d, #fff, #fff);
+  animation: gradient 15s ease infinite;
+  height: 100vh;
+  width: 100vw;
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.box2 {
+  background: radial-gradient(at top left, #33ceff, #fff, #fff);
+  animation: gradient 15s ease infinite;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -3;
+}
+
+nav.navbar {
+  background-color: rgba(255, 255, 255, 0) !important;
+  /* background blur */
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+
+  /* drop shadow */
+    -webkit-box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+
+
+  /* sticky top */
+  position: sticky;
+  top: 0;
+  z-index: 1;
+    padding: 16px;
+}
+
+.navbar-expand {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.container button {
+  margin: 0 !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.container button:focus {
+  margin: 0 !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.container button:active {
+  margin: 0 !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+nav.navbar button {
+  border: none !important;
+}
+
+.navbar-toggler {
+  border: none !important;
+  background-color: rgba(138, 138, 138, 0) !important;
+}
+
+button:active {
+  background-color: rgba(138, 138, 138, 0) !important;
+}

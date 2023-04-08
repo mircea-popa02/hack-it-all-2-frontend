@@ -70,8 +70,7 @@ const Login = () => {
                 }).then(() => {
                     console.log(data.user.id, data.user.name)
                     authContext.onLogin(data.user.id, data.user.name);
-                    // console.log(authContext);
-                    // window.location.href = '/home';
+
                 })
             })
             .catch(err => {
@@ -92,8 +91,8 @@ const Login = () => {
                 <div className='form-container'>
                     <h1>Login</h1>
                     <form onSubmit={handleSubmit}>
-                        <SlInput email="email" label="Email" required ref={emailInputRef} />
-                        <SlInput password="password" label="Pasword" required ref={passwordInputRef} />
+                        <SlInput email="email" label="Email" required ref={emailInputRef} clearable/>
+                        <SlInput  type="password" password="password" label="Pasword" required ref={passwordInputRef} clearable password-toggle/>
                         <br />
                         <Button variant="primary" type="submit">
                             Submit

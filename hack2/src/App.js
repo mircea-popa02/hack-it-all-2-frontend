@@ -11,6 +11,8 @@ import Register from './components/RegisterPage';
 import  AuthContext  from './components/AuthContext';
 import { useContext } from 'react';
 
+import Transactions from './components/Transactions';
+
 
 // add usestate
 import { useState } from 'react';
@@ -35,6 +37,10 @@ function App() {
         </Route>
         <Route exact path="/profile">
           {authContext.isLoggedIn ? <Profile /> : <Redirect to="/" />}
+        </Route>
+
+        <Route exact path="/transactions">
+          {authContext.isLoggedIn ? <Transactions /> : <Redirect to="/" />}
         </Route>
       </Switch>
     </Router>

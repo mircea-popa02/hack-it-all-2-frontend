@@ -73,9 +73,9 @@ const Register = () => {
                 <div className='form-container'>
                     <h1>Register</h1>
                     <form onSubmit={handleSubmit}>
-                        <SlInput name="name" label="Name" required ref={nameInputRef} />
-                        <SlInput email="email" label="Email" required ref={emailInputRef} />
-                        <SlInput password="password" label="Pasword" required ref={passwordInputRef} />
+                        <SlInput name="name" label="Name" required ref={nameInputRef} clearable/>
+                        <SlInput email="email" label="Email" required ref={emailInputRef} clearable/>
+                        <SlInput password="password" label="Pasword" required ref={passwordInputRef} clearable/>
                         <br />
                         <Button variant="primary" type="submit">
                             Submit

@@ -31,6 +31,18 @@
   z-index: -3;
 }
 
+canvas {
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.canvasjs-chart-toolbar {
+    display: none;
+}
+
+.canvasjs-chart-credit {
+    display: none;
+}
+
 .headline {
     font-weight: 300;
     font-size: 3rem;
@@ -68,4 +80,12 @@
 
 .expense h3{
     color: rgb(255, 0, 0);
+}
+
+.open-chat {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 16px;
+    z-index: 100;
 }

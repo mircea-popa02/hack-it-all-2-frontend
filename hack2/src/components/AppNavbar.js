@@ -14,8 +14,9 @@ const AppNavbar = () => {
                     <Nav className="me-auto">
                         <Nav.Link href="/home">Home</Nav.Link>
                         <Nav.Link href="/profile">Profile</Nav.Link>
+                        <Nav.Link href="/transactions">Transactions</Nav.Link>
                         <NavDropdown title="Menu" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+                            <NavDropdown.Item href="/">Send money</NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.2">
                                 Another action
                             </NavDropdown.Item>

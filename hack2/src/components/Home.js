@@ -19,6 +19,8 @@ import Footer from './Footer';
 import Graph from './Graph';
 
 import { SlDetails } from '@shoelace-style/shoelace/dist/react';
+import Swal from 'sweetalert2';
+import { NavLink } from 'react-router-dom';
 
 const Home = () => {
 
@@ -86,7 +88,7 @@ const Home = () => {
                 console.log(err);
             })
 
-        
+
 
     }, [])
 
@@ -114,8 +116,52 @@ const Home = () => {
 
     }, []);
 
-
-
+    const addMoney = () => {
+        Swal.fire
+            ({
+                title: 'Add money',
+                input: 'number',
+                // inputLabel: 'Amount',
+                inputPlaceholder: 'Enter the amount',
+                showCancelButton: true,
+                confirmButtonText: 'Add',
+                showLoaderOnConfirm: true,
+                preConfirm: (amount) => {
+                    console.log(amount);
+                    var url = 'http://localhost:5000/api/payments/ing/';
+                    
+                    fetch(url, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        }
+                        ,
+                        body: JSON.stringify({
+                            value: amount,
+                            type: 'income',
+                            destination: localStorage.getItem('token'),
+                            description: 'Added money via app'
+                    })
+                    })
+                        .then(res => {
+                            if (res.ok) {
+                                return res.json();
+                            } else {
+                                throw new Error('Something went wrong');
+                            }
+                        }
+                        )
+                        .then(data => {
+                            console.log(data);
+                            setBalance(balance + +amount);
+                        }
+                        )
+                        .catch(err => {
+                            console.log(err);
+                        })
+                }
+            })
+    }
 
     const [open, setOpen] = useState(false);
     return (
@@ -127,7 +173,7 @@ const Home = () => {
             <div className='box2'>
             </div> */}
 
-            <Chat />
+            < Chat />
             <Container className='home-container'>
                 {authContext.isLoggedIn && (
                     <>
@@ -137,24 +183,28 @@ const Home = () => {
 
 
                 <h1 className='headline'>Total Balance</h1>
-                <h2 className='user-name'>{balance} <p className=''> RON</p></h2>
+                <h2 className='user-name'>{(balance).toFixed(2)} <p className=''> RON</p></h2>
 
                 <span></span>
 
                 <div className='d-flex button-container align-items-center justify-content-around'>
-                    <div className='group-button d-flex flex-column align-items-center'>
+                    <div className='group-button d-flex flex-column align-items-center' onClick={addMoney}>
                         <div className='round-button d-flex'>
                             <sl-icon name="plus" size="large" />
                         </div>
                         <p>Add</p>
                     </div>
 
+
+                    <NavLink to='/transactions'>
                     <div className='group-button d-flex flex-column align-items-center'>
                         <div className='round-button d-flex'>
                             <sl-icon name="arrow-up-right"></sl-icon>
                         </div>
                         <p>Send</p>
                     </div>
+                    </NavLink>
+
 
                     <div className='group-button d-flex flex-column align-items-center'>
                         <div className='round-button d-flex'>
@@ -165,29 +215,29 @@ const Home = () => {
                 </div>
 
 
-            <h1 className='headline'>Recent transactions</h1>
+                <h1 className='headline'>Recent transactions</h1>
 
-            {/* sorting expenses by date */}
+                {/* sorting expenses by date */}
 
-            {expenses.map((expense) => (
-                <div className='expense card-container' key={expense._id}>
-                    <h3>-{expense.value}</h3>
-                    <p>{expense.description}</p>
-                    <p>{expense.type}</p>
-                    <SlFormatDate date={expense.date} />
-                </div>
-            ))}
+                {expenses.map((expense) => (
+                    <div className='expense card-container' key={expense._id}>
+                        <h3>-{(expense.value).toFixed(2)}</h3>
+                        <p>{expense.description}</p>
+                        <p>{expense.type}</p>
+                        <SlFormatDate date={expense.date} />
+                    </div>
+                ))}
 
-            {incomes.map((income) => (
-                <div className='income card-container' key={income._id}>
-                    <h3>+{income.value} </h3>
-                    <p>{income.description}</p>
-                    <SlFormatDate date={income.date} />
-                </div>
-            ))}
+                {incomes.map((income) => (
+                    <div className='income card-container' key={income._id}>
+                        <h3>+{(income.value).toFixed(2)} </h3>
+                        <p>{income.description}</p>
+                        <SlFormatDate date={income.date} />
+                    </div>
+                ))}
 
-        </Container >
-        <Footer />
+            </Container >
+            <Footer />
         </>
 
     );

@@ -13,9 +13,9 @@ CanvasJS.addColorSet("redShades",
         "#FF6347",
         "#DC143C",
         "#FF4500",
+        "#B22222",
         "#FF8C00",
-        "#FFFF00",
-        "#B22222 ",
+        "#FFFF00"
     ]);
 
 

@@ -14,6 +14,8 @@ import { useContext } from 'react';
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
 
+import Chat from './Chat';
+
 import AppNavbar from './AppNavbar';
 const Transactions = () => {
 
@@ -130,11 +132,15 @@ const Transactions = () => {
     return (
         <>
             <AppNavbar />
+            <Chat />
 
             <Container className='home-container'>
                 <h1 className='headline'>Transactions</h1>
-                <h2 className='user-name'>{balance} RON</h2>
+                <h2 className='user-name'>{balance.toFixed(2)} RON</h2>
                 <span>Send money to any user</span>
+                <br />
+                <br />
+                <br />
 
                 <div className='form-container'>
                 <form onSubmit={sendMoney}>

@@ -8,6 +8,8 @@ import { useRef, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import AuthContext from './AuthContext';
 
+
+
 import { SlDivider } from '@shoelace-style/shoelace/dist/react';
 
 // import css
@@ -82,8 +84,7 @@ const Login = () => {
 
     return (
         <>
-            
-
+        
             <Container className='d-flex align-items-center justify-content-center flex-column' style={{ minHeight: '100vh' }}>
                 <div className='form-container'>
                     <h1>Login</h1>

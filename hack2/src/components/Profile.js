@@ -19,8 +19,6 @@ import { useState } from 'react';
 import AppNavbar from './AppNavbar';
 import Swal from 'sweetalert2';
 
-import News from './News';
-
 
 import emailjs from 'emailjs-com';
 const Profile = () => {
@@ -190,6 +188,8 @@ const Profile = () => {
 
                 <div className='form-container'>
                     <h1 className='headline'>Profile </h1>
+
+                    
                     
                     {/* <h3 className='user-name'>Hello, {localStorage.getItem('nume')}</h3> */}
 
@@ -257,8 +257,6 @@ const Profile = () => {
                 </div>
             </Container>
             <Footer />
-
-
         </>
     );
 }

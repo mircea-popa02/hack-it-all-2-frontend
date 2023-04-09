@@ -179,11 +179,11 @@ const Home = () => {
     return (
         <>
             <AppNavbar />
-            <div className='box1'>
+            {/* <div className='box1'>
             </div>
 
             <div className='box2'>
-            </div>
+            </div> */}
 
             < Chat />
             <Container className='home-container'>
@@ -236,8 +236,10 @@ const Home = () => {
                 {expenses.map((expense) => (
                     <div className='expense card-container d-flex' key={expense._id}>
                         <h3>-{(expense.value).toFixed(2)}</h3>
+                        <Col>
                         <p>{expense.type}</p>
                         <p>{expense.description}</p>
+                        </Col>
                         <SlFormatDate date={expense.date} className='date'/>
                     </div>
                 ))}
@@ -246,7 +248,10 @@ const Home = () => {
                 {incomes.map((income) => (
                     <div className='income card-container d-flex' key={income._id}>
                         <h3>+{(income.value).toFixed(2)} </h3>
+                        <Col>
+                        <p>{income.type}</p>
                         <p>{income.description}</p>
+                        </Col>
                         <SlFormatDate date={income.date} />
                     </div>
                 ))}

@@ -57,7 +57,7 @@ const Register = () => {
                         title: 'Success',
                         text: 'You have successfully registered!',
                     })
-                    window.location.href = '/home';
+                    window.location.href = '/login';
                 }
             }
 
@@ -79,7 +79,7 @@ const Register = () => {
                         </Button>
                     </form>
                     <SlDivider></SlDivider>
-                    <p className='p-faded'>Already have an account? <NavLink to='/'>Login</NavLink></p>
+                    <p className='p-faded'>Already have an account? <NavLink to='/login'>Login</NavLink></p>
 
                 </div>
             </Container>

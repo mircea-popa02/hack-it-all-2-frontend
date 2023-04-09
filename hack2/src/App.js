@@ -17,6 +17,8 @@ import News from './components/News';
 
 import Transactions from './components/Transactions';
 
+import Landing from './components/Landing';
+
 
 // add usestate
 import { useState } from 'react';
@@ -31,11 +33,15 @@ function App() {
     <Router>
       <Switch>
         <Route exact path="/">
-          {authContext.isLoggedIn ? <Redirect to="/home" /> : <Login  />}
+          {authContext.isLoggedIn ? <Redirect to="/home" /> : <Landing  />}
         </Route>
         <Route exact path="/register">
           {authContext.isLoggedIn ? <Redirect to="/home" /> : <Register />}
         </Route>
+        <Route exact path="/login">
+          {authContext.isLoggedIn ? <Home /> :  <Login />}
+        </Route>
+
         <Route exact path="/home">
           {authContext.isLoggedIn ? <Home /> : <Redirect to="/" />}
         </Route>
@@ -50,10 +56,10 @@ function App() {
         <Route exact path="/news">
           {authContext.isLoggedIn ? <News /> : <Redirect to="/" />}
         </Route>
-
         <Route path="/action">
           {authContext.isLoggedIn ? <Action /> : <Redirect to="/" />}
         </Route>
+
       </Switch>
     </Router>
   );

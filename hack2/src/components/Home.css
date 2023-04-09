@@ -9,7 +9,7 @@
 }
 
 .box1 {
-  background: radial-gradient(at top right, #ceffd9, #fff, #fff);
+  background: radial-gradient(at top right, #dcffd1, #fff, #fff);
   animation: gradient 15s ease infinite;
   height: 100vh;
   width: 100%;
@@ -21,7 +21,7 @@
 }
 
 .box2 {
-  background: radial-gradient(at top left, #ff070731, #fff, #fff);
+  background: radial-gradient(at top left, #b0cdff, #fff, #fff);
   animation: gradient 15s ease infinite;
   height: 100vh;
   width: 100%;
@@ -93,6 +93,10 @@ canvas {
     padding: 16px !important;
     /* margin-top: 5vh; */
     border-radius: 4px !important;
+}
+
+h3 {
+    padding-right: 32px;
 }
 
 .card-container {

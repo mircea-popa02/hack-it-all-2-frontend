@@ -1,0 +1,37 @@
+
+.landing-page img {
+    width: 400px;
+    height: 400px;
+    margin: 0 auto;
+    display: block;
+    object-fit: cover;
+}
+
+/* mobile */
+@media screen and (max-width: 768px) {
+    .landing-page img {
+        width: 300px;
+        height: 300px;
+        margin-top: 32px;
+    }
+    .landing-container {
+        margin-bottom: 100px !important;
+    }
+}
+
+.landing-page {
+    margin: 100px;
+}
+.vertical {
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+    text-transform: uppercase;
+    transform: rotate(180deg);
+    opacity: 0.5;
+    font-weight: 700;
+    font-size: small;
+    font-family: 'Lexend', sans-serif;
+    position: absolute;
+    top: 50%;
+    left: 0;
+  }

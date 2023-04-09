@@ -3,22 +3,22 @@
   bottom: 64px;
   right: 0 !important;
   width: 350px !important;
-  max-height: 700px !important;
+  max-height: 80vhp !important;
   overflow-y: scroll;
   padding: 16px !important;
   margin-top: 5vh;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
   /* background blur */
   z-index: 1000;
-  max-height: 50vw;
-  /* hide scroll bars */
+  max-height: 60vh;
+  border-radius: 4px;
   scrollbar-width: none;
   -ms-overflow-style: none;
 
   background-color: rgba(255, 255, 255, 0) !important;
   /* background blur */
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(30px);
+  backdrop-filter: blur(30px);
 
 }
 
@@ -42,6 +42,12 @@
     font-weight: 300;
     margin-bottom: 16px;
 }
+
+.loader {
+    margin-bottom: 16px;
+}
+
+
 
 .buttons .option:hover {
     background-color: #e4e4e4;

@@ -15,17 +15,7 @@ const AppNavbar = () => {
                         <Nav.Link href="/home">Home</Nav.Link>
                         <Nav.Link href="/profile">Profile</Nav.Link>
                         <Nav.Link href="/transactions">Transactions</Nav.Link>
-                        <NavDropdown title="Menu" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="/">Send money</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2">
-                                Another action
-                            </NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item href="#action/3.4">
-                                Separated link
-                            </NavDropdown.Item>
-                        </NavDropdown>
+                        <Nav.Link href="/news">News</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

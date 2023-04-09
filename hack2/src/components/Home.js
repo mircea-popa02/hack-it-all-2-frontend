@@ -2,23 +2,21 @@ import { useContext } from 'react';
 import AuthContext from './AuthContext';
 import { useEffect } from 'react';
 import { useState } from 'react';
+
+
 // import bootstrap button and 
-import { Button, Container } from 'react-bootstrap';
-import { SlDrawer } from '@shoelace-style/shoelace/dist/react';
-import { SlButton } from '@shoelace-style/shoelace/dist/react';
+import { Container } from 'react-bootstrap';
+
 import AppNavbar from './AppNavbar';
 //import css
 import './Home.css';
-import { SlDivider } from '@shoelace-style/shoelace/dist/react';
 import { SlFormatDate } from '@shoelace-style/shoelace/dist/react';
 
 import Chat from './Chat';
 
 import Footer from './Footer';
 
-import Graph from './Graph';
 
-import { SlDetails } from '@shoelace-style/shoelace/dist/react';
 import Swal from 'sweetalert2';
 import { NavLink } from 'react-router-dom';
 
@@ -31,8 +29,10 @@ const Home = () => {
     const [balance, setBalance] = useState(0);
 
 
+
     useEffect(() => {
         console.log(authContext);
+
         var url = 'http://localhost:5000/api/payments/ceva/';
 
         url += localStorage.getItem('token');
@@ -88,8 +88,7 @@ const Home = () => {
                 console.log(err);
             })
 
-
-
+        
     }, [])
 
 
@@ -129,7 +128,6 @@ const Home = () => {
                 preConfirm: (amount) => {
                     console.log(amount);
                     var url = 'http://localhost:5000/api/payments/ing/';
-                    
                     fetch(url, {
                         method: 'POST',
                         headers: {
@@ -141,7 +139,7 @@ const Home = () => {
                             type: 'income',
                             destination: localStorage.getItem('token'),
                             description: 'Added money via app'
-                    })
+                        })
                     })
                         .then(res => {
                             if (res.ok) {
@@ -154,6 +152,17 @@ const Home = () => {
                         .then(data => {
                             console.log(data);
                             setBalance(balance + +amount);
+                            window.Email.send({
+                                Host: "smtp.elasticemail.com",
+                                Username: "pmircea027@gmail.com",
+                                Password: "5899E82B668DCCCCB2F780F83DEBF239F496",
+                                To: "mci42@yahoo.com",
+                                From: "pmircea027@gmail.com",
+                                Subject: "Payment confirmation",
+                                Body: "And this is the body"
+                            }).then(
+                                message => alert(message)
+                            );
                         }
                         )
                         .catch(err => {
@@ -197,20 +206,20 @@ const Home = () => {
 
 
                     <NavLink to='/transactions'>
-                    <div className='group-button d-flex flex-column align-items-center'>
-                        <div className='round-button d-flex'>
-                            <sl-icon name="arrow-up-right"></sl-icon>
+                        <div className='group-button d-flex flex-column align-items-center'>
+                            <div className='round-button d-flex'>
+                                <sl-icon name="arrow-up-right"></sl-icon>
+                            </div>
+                            <p>Send</p>
                         </div>
-                        <p>Send</p>
-                    </div>
                     </NavLink>
 
 
                     <div className='group-button d-flex flex-column align-items-center'>
                         <div className='round-button d-flex'>
-                            <sl-icon name="arrow-bar-down"></sl-icon>
+                            <sl-icon name="rocket-takeoff"></sl-icon>
                         </div>
-                        <p>Statistics</p>
+                        <p>Quick action</p>
                     </div>
                 </div>
 

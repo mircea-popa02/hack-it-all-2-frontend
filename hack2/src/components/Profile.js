@@ -18,6 +18,11 @@ import { useState } from 'react';
 
 import AppNavbar from './AppNavbar';
 import Swal from 'sweetalert2';
+
+import News from './News';
+
+
+import emailjs from 'emailjs-com';
 const Profile = () => {
     const [group, setGroup] = useState([]);
     const authContext = useContext(AuthContext);
@@ -32,6 +37,9 @@ const Profile = () => {
     const splitRef = useRef();
 
     const [splitValue, setSplitValue] = useState(0);
+
+    const SERVICE_ID = "service_56d159q";
+    const TEMPLATE_ID = "template_0yyo3hd";
 
 
     useEffect(() => {
@@ -101,6 +109,8 @@ const Profile = () => {
         const splitDescNew = splitRefDesc.current.value;
         console.log(splitValue);
         setSplitValue(0);
+
+
         const promises = [];
         for (let i = 0; i < group.length; i++) {
             promises.push(

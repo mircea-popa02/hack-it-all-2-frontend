@@ -11,6 +11,8 @@ import Register from './components/RegisterPage';
 import  AuthContext  from './components/AuthContext';
 import { useContext } from 'react';
 
+import Action from './components/Action';
+
 import News from './components/News';
 
 import Transactions from './components/Transactions';
@@ -49,6 +51,9 @@ function App() {
           {authContext.isLoggedIn ? <News /> : <Redirect to="/" />}
         </Route>
 
+        <Route path="/action">
+          {authContext.isLoggedIn ? <Action /> : <Redirect to="/" />}
+        </Route>
       </Switch>
     </Router>
   );

@@ -64,7 +64,7 @@ const ChatGPT = () => {
     }, []);
 
     const getAdvice = () => {
-
+        
         let advice = 'Here are my spendings in RON: ';
         for (let i = 0; i < expenses.length; i++) {
             advice += expenses[i].type + ' ' + expenses[i].value + ', ';
@@ -81,7 +81,7 @@ const ChatGPT = () => {
 
         advice += 'What can I do to improve my finances based on my current situation?';
 
-        setMessages([...messages, advice]);
+        // setMessages([...messages, advice]);
 
         const data = {
             data: advice,

@@ -24,6 +24,14 @@
     
 }
 
+.under-limit {
+    color: rgb(24, 205, 90);
+}
+
+.over-limit {
+    color: rgb(255, 0, 0);
+}
+
 .option {
     background-color: #5c5c5c;
     color: white;

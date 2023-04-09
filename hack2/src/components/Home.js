@@ -20,6 +20,8 @@ import Footer from './Footer';
 import Swal from 'sweetalert2';
 import { NavLink } from 'react-router-dom';
 
+import { Row, Col } from 'react-bootstrap';
+
 const Home = () => {
 
     const authContext = useContext(AuthContext);
@@ -88,7 +90,7 @@ const Home = () => {
                 console.log(err);
             })
 
-        
+
     }, [])
 
 
@@ -160,8 +162,9 @@ const Home = () => {
                                 From: "pmircea027@gmail.com",
                                 Subject: "Payment confirmation",
                                 Body: "And this is the body"
-                            }).then(
-                                message => alert(message)
+                            }).then( 
+                                // refresh
+                                window.location.reload()
                             );
                         }
                         )
@@ -176,11 +179,11 @@ const Home = () => {
     return (
         <>
             <AppNavbar />
-            {/* <div className='box1'>
+            <div className='box1'>
             </div>
 
             <div className='box2'>
-            </div> */}
+            </div>
 
             < Chat />
             <Container className='home-container'>
@@ -191,7 +194,7 @@ const Home = () => {
                 )}
 
 
-                <h1 className='headline'>Total Balance</h1>
+                <h1 className='headline'>Total Balance <sl-icon name="currency-exchange"></sl-icon></h1>
                 <h2 className='user-name'>{(balance).toFixed(2)} <p className=''> RON</p></h2>
 
                 <span></span>
@@ -214,36 +217,42 @@ const Home = () => {
                         </div>
                     </NavLink>
 
-
-                    <div className='group-button d-flex flex-column align-items-center'>
-                        <div className='round-button d-flex'>
-                            <sl-icon name="rocket-takeoff"></sl-icon>
+                    <NavLink to='/action'>
+                        <div className='group-button d-flex flex-column align-items-center'>
+                            <div className='round-button d-flex'>
+                                <sl-icon name="rocket-takeoff"></sl-icon>
+                            </div>
+                            <p>Pay</p>
                         </div>
-                        <p>Quick action</p>
-                    </div>
+                    </NavLink>
                 </div>
 
-
+                
                 <h1 className='headline'>Recent transactions</h1>
 
                 {/* sorting expenses by date */}
-
+                <Row>
+                <Col>
                 {expenses.map((expense) => (
-                    <div className='expense card-container' key={expense._id}>
+                    <div className='expense card-container d-flex' key={expense._id}>
                         <h3>-{(expense.value).toFixed(2)}</h3>
-                        <p>{expense.description}</p>
                         <p>{expense.type}</p>
-                        <SlFormatDate date={expense.date} />
+                        <p>{expense.description}</p>
+                        <SlFormatDate date={expense.date} className='date'/>
                     </div>
                 ))}
-
+                </Col>
+                <Col>
                 {incomes.map((income) => (
-                    <div className='income card-container' key={income._id}>
+                    <div className='income card-container d-flex' key={income._id}>
                         <h3>+{(income.value).toFixed(2)} </h3>
                         <p>{income.description}</p>
                         <SlFormatDate date={income.date} />
                     </div>
                 ))}
+                </Col>
+
+            </Row>  
 
             </Container >
             <Footer />

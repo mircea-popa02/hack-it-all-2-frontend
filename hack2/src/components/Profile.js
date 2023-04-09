@@ -41,8 +41,37 @@ const Profile = () => {
     const SERVICE_ID = "service_56d159q";
     const TEMPLATE_ID = "template_0yyo3hd";
 
+    const [income, setIncome] = useState([]);
+    const [expenses, setExpenses] = useState([]);
+
+
 
     useEffect(() => {
+        var url = "http://localhost:5000/api/payments/ceva/";
+
+        url += localStorage.getItem("token");
+
+        fetch(url, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+            .then((res) => {
+                if (res.ok) {
+                    return res.json();
+                } else {
+                    throw new Error("Something went wrong");
+                }
+            })
+            .then((data) => {
+                console.log(data);
+                setIncome(data.incomes);
+                setExpenses(data.expenses);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
         fetch('http://localhost:5000/api/users/ceva/' + localStorage.getItem('nume'))
 
             .then(res => res.json())
@@ -51,12 +80,12 @@ const Profile = () => {
                 setAccountLimit(data.user.accountlimit);
             })
 
-            fetch("http://localhost:5000/api/groups/643185b22613671bb452c29d", {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            })
+        fetch("http://localhost:5000/api/groups/643185b22613671bb452c29d", {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
             .then(res => {
                 if (res.ok) {
                     return res.json();
@@ -99,7 +128,7 @@ const Profile = () => {
             .then(data => {
                 console.log(data);
                 setAccountLimit(data.user.accountlimit);
-                
+
             })
     }
 
@@ -114,42 +143,42 @@ const Profile = () => {
         const promises = [];
         for (let i = 0; i < group.length; i++) {
             promises.push(
-            fetch(
-              `http://localhost:5000/api/payments/`,
-              {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  value: splitValueNew / group.length,
-                  creator: group[i]._id,
-                  description: splitDescNew,
-                  type: "Split",
-                  destination: "6431ed1a8deaff540c2022e6"
-                }),
-              }
-            )
+                fetch(
+                    `http://localhost:5000/api/payments/`,
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            value: splitValueNew / group.length,
+                            creator: group[i]._id,
+                            description: splitDescNew,
+                            type: "Split",
+                            destination: "6431ed1a8deaff540c2022e6"
+                        }),
+                    }
+                )
             );
         }
         Promise.all(promises)
-        .then((res) => {
-            console.log(res);
-            Swal.fire ({
-                title: 'Success!',
-                text: 'Split payment made',
-                icon: 'success',
-                confirmButtonText: 'Ok'
+            .then((res) => {
+                console.log(res);
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Split payment made',
+                    icon: 'success',
+                    confirmButtonText: 'Ok'
+                })
             })
-        })
-        .catch((err) => {
-            console.log(err);
-        }
-        )
+            .catch((err) => {
+                console.log(err);
+            }
+            )
 
         setSplitValue(0);
     };
-    
+
 
 
     return (
@@ -157,15 +186,29 @@ const Profile = () => {
             <AppNavbar />
             <Chat />
             <Container className='home-container'>
-                
+
 
                 <div className='form-container'>
-                <h1 className='headline'>Profile</h1>
-                {/* <h3 className='user-name'>Hello, {localStorage.getItem('nume')}</h3> */}
-                
-                
-                <h3 className='user-name'>Hello, {localStorage.getItem('nume')}</h3>
+                    <h1 className='headline'>Profile </h1>
+                    
+                    {/* <h3 className='user-name'>Hello, {localStorage.getItem('nume')}</h3> */}
+
+
+                    <h3 className='user-name'>Hello, {localStorage.getItem('nume')}</h3>
+                    
                     <span>Your set montly limit is {accountLimit} RON</span>
+                    <p>
+                    {expenses
+                        .map((expense) => expense.value)
+                        .reduce((total, item) => total + item, 0) > accountLimit
+                        ? <p className="over-limit">Your total spendings are {expenses
+                            .map((expense) => expense.value)
+                            .reduce((total, item) => total + item, 0)
+                            .toFixed(2)} RON. You are over your limit</p>
+                        : <p className='under-limit'>You are on track</p>
+
+                    }
+                    </p>
                     <form onSubmit={setLimit}>
                         <SlInput placeholder="Set limit" ref={limit} value={limita} clearable />
                         <br />
@@ -173,25 +216,27 @@ const Profile = () => {
                             Submit
                         </Button>
                     </form>
+
+                    
                 </div>
             </Container>
 
             <Container className='home-container'>
-            <div className='form-container'>
-                <h1 className='headline'>Group members</h1>
-                <p>Split payments with your friends</p>
-                <br></br>
-                <div className='group-container d-flex flex-wrap'>
-                    {group.filter((member) => member.name !== "ING" ).filter((member) => member.name !== "GroupUser").filter((member) => member.name !== "Politehnica").map((member) => (
-                        <div className='option'>
-                            {member.name}
-                        </div>
-                    ))}
-                </div>
-                <br></br>
-                <form onSubmit={makeSplitPayment}>
+                <div className='form-container'>
+                    <h1 className='headline'>Group members</h1>
+                    <p>Split payments with your friends</p>
+                    <br></br>
+                    <div className='group-container d-flex flex-wrap'>
+                        {group.filter((member) => member.name !== "ING").filter((member) => member.name !== "GroupUser").filter((member) => member.name !== "Politehnica").map((member) => (
+                            <div className='option'>
+                                {member.name}
+                            </div>
+                        ))}
+                    </div>
+                    <br></br>
+                    <form onSubmit={makeSplitPayment}>
 
-                    <span>Make a split payment</span>
+                        <span>Make a split payment</span>
                         <SlInput placeholder="Value" ref={splitRef} value={splitValue} clearable />
                         <br />
                         <SlInput placeholder="Description" ref={splitRefDesc} value={splitDesc} clearable />
@@ -200,16 +245,16 @@ const Profile = () => {
                             Submit
                         </Button>
                     </form>
-            </div>
+                </div>
             </Container>
 
             <Container className='home-container'>
-            <div className='form-container'>
-                <h1 className='headline'>Statistics</h1>
-                <h3 className='user-name'>Spendings</h3>
-                <br></br>
-                <Graph />
-            </div>
+                <div className='form-container'>
+                    <h1 className='headline'>Statistics</h1>
+                    <h3 className='user-name'>Spendings</h3>
+                    <br></br>
+                    <Graph />
+                </div>
             </Container>
             <Footer />
 

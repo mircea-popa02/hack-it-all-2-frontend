@@ -9,7 +9,7 @@
 }
 
 .box1 {
-  background: radial-gradient(at top right, #6dfc8d, #fff, #fff);
+  background: radial-gradient(at top right, #ceffd9, #fff, #fff);
   animation: gradient 15s ease infinite;
   height: 100vh;
   width: 100%;
@@ -21,7 +21,7 @@
 }
 
 .box2 {
-  background: radial-gradient(at top left, #33ceff, #fff, #fff);
+  background: radial-gradient(at top left, #ff070731, #fff, #fff);
   animation: gradient 15s ease infinite;
   height: 100vh;
   width: 100%;
@@ -105,10 +105,12 @@ canvas {
 
 .income h3{
     color: rgb(24, 205, 90);
+    margin: 0 !important;
 }
 
 .expense h3{
     color: rgb(255, 0, 0);
+    margin: 0 !important;
 }
 
 .open-chat {
@@ -119,4 +121,25 @@ canvas {
     z-index: 100;
 }
 
+.date {
+    color: grey
+}
+
+.income p {
+    margin: 0 !important;
+}
+
+.expense p {
+    margin: 0 !important;
+}
+
+.income {
+    justify-content: space-between;
+    align-items: center
+}
+
+.expense {
+    justify-content: space-between;
+    align-items: center
+}
 

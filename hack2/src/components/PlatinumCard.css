@@ -1,0 +1,49 @@
+.platinum-card {
+  background-color: #ffd700; /* Gold color, will show while the image is loading or if the image fails to load */
+  background-image: url("./images/platinum-card.png"); /* Path to your background image */
+  background-size: cover; /* Cover the entire space of the element */
+  background-position: center; /* Center the image in the element */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for a raised card effect */
+  color: #333; /* Text color, can be changed to something that contrasts well with gold */
+  padding: 20px;
+  max-width: 300px; /* Width of the card */
+  margin: 20px auto; /* Center the card */
+  text-align: center; /* Center text */
+  font-family: "Arial", sans-serif; /* Font family can be changed */
+  overflow: hidden; /* Ensure the background image does not leak outside the border-radius */
+}
+
+.platinum-card-inner {
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center; /* Align items horizontally */
+  justify-content: center; /* Center items vertically */
+}
+
+.platinum-card-title {
+  font-size: 24px; /* Large font size for the title */
+  margin-bottom: 10px;
+}
+
+.platinum-card-text {
+  font-size: 16px; /* Smaller font size for the subtitle */
+  margin-bottom: 20px;
+}
+
+.platinum-card-button {
+  background-color: #fff; /* Button color - white is chosen for contrast */
+  color: #ffd700; /* Button text color - gold */
+  border: 2px solid #ffd700; /* Gold border for the button */
+  border-radius: 5px; /* Rounded corners for the button */
+  padding: 10px 20px; /* Padding inside the button */
+  font-size: 18px; /* Button font size */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s, color 0.3s; /* Transition for button hover effect */
+}
+
+.platinum-card-button:hover {
+  background-color: #ffd700; /* Button hover color - gold */
+  color: #fff; /* Button text hover color - white */
+}

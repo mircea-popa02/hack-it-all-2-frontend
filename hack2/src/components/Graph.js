@@ -7,15 +7,14 @@ import { useEffect } from 'react';
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-CanvasJS.addColorSet("redShades",
+CanvasJS.addColorSet("blueShades",
     [
-        "#FF5733 ",
-        "#FF6347",
-        "#DC143C",
-        "#FF4500",
-        "#B22222",
-        "#FF8C00",
-        "#FFFF00"
+        "#0018a8",
+        "#0053DB",
+        "#007DF1",
+        "#00A1EC",
+        "#00C2D5",
+        "#00E2B6"
     ]);
 
 
@@ -94,11 +93,9 @@ const Graph = () => {
         { y: activities * 100 / sum, label: "Activities" },
         { y: entertainment * 100 / sum, label: "Entertainment" },
         { y: transport * 100 / sum, label: "Transport" },
-        { y: accomodation * 100 / sum, label: "Accomodation" },
-        { y: other * 100 / sum, label: "Other" }
+        { y: (accomodation * 100 / sum).toFixed(2), label: "Accomodation" },
+        { y: (other * 100 / sum).toFixed(2), label: "Other" }
     ];
-
-
 
     // sum all incomes
     var sum2 = 0;
@@ -115,7 +112,7 @@ const Graph = () => {
         theme: "ligh1", // "light1", "dark1", "dark2"
         title: {
         },
-        colorSet: "redShades",
+        colorSet: "blueShades",
         data: [{
             type: "pie",
             indexLabel: "{label}: {y}%",

@@ -91,7 +91,6 @@ const Action = () => {
     return (
         <>
             <Navbar />
-            <Chat />
             <Container className='home-container'>
                 <div className='form-container'>
                     <h1 className='headline'>Quick action <sl-icon name="rocket-takeoff"></sl-icon></h1>

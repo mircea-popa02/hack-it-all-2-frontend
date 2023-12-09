@@ -1,5 +1,6 @@
 // import css
 import './Profile.css';
+import background from './bg.jpg';
 import { useContext, useRef } from 'react';
 import AuthContext from './AuthContext';
 import { Button } from 'react-bootstrap';
@@ -8,6 +9,7 @@ import Footer from './Footer';
 
 import Graph from './Graph';
 import Chat from './Chat';
+import DefaultImage from './default-user.jpg';
 
 import { SlInput } from '@shoelace-style/shoelace/dist/react';
 
@@ -41,8 +43,6 @@ const Profile = () => {
 
     const [income, setIncome] = useState([]);
     const [expenses, setExpenses] = useState([]);
-
-
 
     useEffect(() => {
         var url = "http://localhost:5000/api/payments/ceva/";
@@ -102,7 +102,6 @@ const Profile = () => {
             }
             )
     }, [])
-
 
     const setLimit = (e) => {
         e.preventDefault();
@@ -177,52 +176,48 @@ const Profile = () => {
         setSplitValue(0);
     };
 
-
-
     return (
         <>
             <AppNavbar />
-            <Chat />
+            <div className='background'>
+                <img src={background} alt="background" />
+                <div className='background-whitefade'></div>
+            </div>
             <Container className='home-container'>
-
-
-                <div className='form-container'>
-                    <h1 className='headline'>Profile </h1>
-
-                    
-                    
-                    {/* <h3 className='user-name'>Hello, {localStorage.getItem('nume')}</h3> */}
-
-
-                    <h3 className='user-name'>Hello, {localStorage.getItem('nume')}</h3>
-                    
-                    <span>Your set montly limit is {accountLimit} RON</span>
-                    <p>
-                    {expenses
-                        .map((expense) => expense.value)
-                        .reduce((total, item) => total + item, 0) > accountLimit
-                        ? <p className="over-limit">Your total spendings are {expenses
+                <div className='form-container d-flex flex-column small'>
+                    <div className='d-flex flex-row justify-content-between'>
+                        <div>
+                            <h1 className='headline'>Profile </h1>
+                            <h3 className='user-name'>Hello, {localStorage.getItem('nume')}</h3>
+                        </div>
+                        <img src={DefaultImage} alt="default" className='default-image' />
+                    </div>
+                    <div className='line'></div>
+                    <div>
+                        <p>Your set <strong>montly limit</strong> is {accountLimit} RON</p>
+                        <p>
+                        {expenses
                             .map((expense) => expense.value)
-                            .reduce((total, item) => total + item, 0)
-                            .toFixed(2)} RON. You are over your limit</p>
-                        : <p className='under-limit'>You are on track</p>
+                            .reduce((total, item) => total + item, 0) > accountLimit
+                            ? <p className="over-limit">Your total spendings are {expenses
+                                .map((expense) => expense.value)
+                                .reduce((total, item) => total + item, 0)
+                                .toFixed(2)} RON. You are over your limit</p>
+                            : <p className='under-limit'>You are on track</p>
 
-                    }
-                    </p>
-                    <form onSubmit={setLimit}>
-                        <SlInput placeholder="Set limit" ref={limit} value={limita} clearable />
-                        <br />
-                        <Button variant="primary" type="submit">
-                            Submit
-                        </Button>
-                    </form>
-
-                    
+                        }
+                        </p>
+                        <form onSubmit={setLimit}>
+                            <SlInput placeholder="Set new limit" ref={limit} value={limita} clearable />
+                            <br />
+                            <Button variant="primary" type="submit">
+                                Submit
+                            </Button>
+                        </form>
+                    </div>
                 </div>
-            </Container>
 
-            <Container className='home-container'>
-                <div className='form-container'>
+                {/* <div className='form-container'>
                     <h1 className='headline'>Group members</h1>
                     <p>Split payments with your friends</p>
                     <br></br>
@@ -245,10 +240,9 @@ const Profile = () => {
                             Submit
                         </Button>
                     </form>
-                </div>
-            </Container>
+                </div> */}
 
-            <Container className='home-container'>
+                <br></br>
                 <div className='form-container'>
                     <h1 className='headline'>Statistics</h1>
                     <h3 className='user-name'>Spendings</h3>

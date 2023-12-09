@@ -23,10 +23,9 @@ export const AuthContextProvider = (props) => {
     setNume(null);
     localStorage.removeItem("token");
     localStorage.removeItem("nume");
-
   };
 
-  const loginHandler = (token, nume) => {
+  const loginHandler = (token, nume, coins) => {
     setToken(token);
     setNume(nume);
     localStorage.setItem("token", token);

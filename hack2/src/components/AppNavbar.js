@@ -23,6 +23,7 @@ const AppNavbar = () => {
                             <Nav.Link href="/profile">Profile</Nav.Link>
                             <Nav.Link href="/transactions">Transactions</Nav.Link>
                             <Nav.Link href="/news">News</Nav.Link>
+                            <Nav.Link href="http://localhost:5173/">Earn Coins</Nav.Link>
                             <Nav.Link href="/action">                            
                                 <Button variant="danger" onClick={authContext.onLogout}>
                                     Logout

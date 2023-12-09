@@ -9,9 +9,6 @@ import { NavLink } from 'react-router-dom';
 import AuthContext from './AuthContext';
 
 
-
-
-
 import { SlDivider } from '@shoelace-style/shoelace/dist/react';
 
 // import css

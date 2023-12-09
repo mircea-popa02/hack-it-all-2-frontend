@@ -11,7 +11,7 @@ import Register from './components/RegisterPage';
 import  AuthContext  from './components/AuthContext';
 import { useContext } from 'react';
 
-import Action from './components/Action';
+import Redeem from './components/Redeem';
 
 import News from './components/News';
 
@@ -57,7 +57,7 @@ function App() {
           {authContext.isLoggedIn ? <News /> : <Redirect to="/" />}
         </Route>
         <Route path="/action">
-          {authContext.isLoggedIn ? <Action /> : <Redirect to="/" />}
+          {authContext.isLoggedIn ? <Redeem /> : <Redirect to="/" />}
         </Route>
 
       </Switch>

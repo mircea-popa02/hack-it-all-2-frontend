@@ -1,0 +1,5 @@
+.my-custom-component {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add shadow for card */
+  border-radius: 15px; /* Rounded corners */
+  /* Add more styles as per your requirement */
+}

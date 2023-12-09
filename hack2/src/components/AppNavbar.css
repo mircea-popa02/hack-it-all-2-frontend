@@ -22,15 +22,7 @@
 }
 
 nav.navbar {
-  background-color: rgba(255, 255, 255, 0) !important;
-  /* background blur */
-  -webkit-backdrop-filter: blur(30px);
-  backdrop-filter: blur(30px);
-
-  /* drop shadow */
-  -webkit-box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
-
-  /* sticky top */
+  background-color: rgb(255, 255, 255) !important;
   position: sticky;
   top: 0;
   z-index: 1;

@@ -20,6 +20,11 @@ import { useContext } from "react";
 import Action from "./components/Action";
 import Transactions from "./components/Transactions";
 
+import Redeem from './components/Redeem';
+
+import News from './components/News';
+
+
 import Landing from "./components/Landing";
 
 // add usestate
@@ -62,7 +67,7 @@ function App() {
           {authContext.isLoggedIn ? <Marketplace /> : <Redirect to="/" />}
         </Route>
         <Route path="/action">
-          {authContext.isLoggedIn ? <Action /> : <Redirect to="/" />}
+          {authContext.isLoggedIn ? <Redeem /> : <Redirect to="/" />}
         </Route>
       </Switch>
     </Router>

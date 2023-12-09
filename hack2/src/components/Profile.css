@@ -1,35 +1,38 @@
 .home-container {
-    background-color: rgba(255, 255, 255, 0.583);
-    padding: 16px;
-    margin-top: 5vh;
-    border-radius: 4px;
-    /* box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2); */
-    /* background blur */
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    
+    padding: 64px !important;
+    background-color: transparent;
+    padding-top: 16px !important;
+    z-index: 100 !important;
 }
 
-
 .form-container {
-    background-color: rgba(255, 255, 255, 0.583);
+    margin-top: 1rem !important;
+    background-color: #fff !important;
     padding: 16px;
-    /* margin-top: 5vh; */
-    border-radius: 4px;
-    max-width: 60%;
-    /* box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2); */
-    /* background blur */
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    
+    position: relative;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 0;
 }
 
 .under-limit {
-    color: rgb(24, 205, 90);
+    color: rgb(5, 150, 41);
+}
+
+.default-image {
+    width: 82px;
+    height: 82px;
+    clip-path: circle(50%);
+}
+
+.balance-container {
+    background-color: #fff !important;
+    padding: 16px;
+    position: relative;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
 }
 
 .over-limit {
-    color: rgb(255, 0, 0);
+    color: rgb(245, 93, 93);
 }
 
 .option {
@@ -51,4 +54,29 @@
     .form-container {
         max-width: 100%;
     }
+}
+
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.background-whitefade {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+    width: 100%;
+    height: 200px;
+    position: relative;
+    top: -200px;
+}
+
+.small {
+    width: 500px !important;
 }

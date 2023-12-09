@@ -1,0 +1,7 @@
+.footer-container {
+    background-color: #eeeeee !important;
+    padding: 16px;
+    /* move up 100px */
+    margin-top: -100px;
+    z-index: -2 !important;
+}

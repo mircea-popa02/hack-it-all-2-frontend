@@ -132,21 +132,25 @@ const Transactions = () => {
     return (
         <>
             <AppNavbar />
-            <Chat />
-
             <Container className='home-container'>
                 <h1 className='headline'>Transactions</h1>
                 <h2 className='user-name'>{balance.toFixed(2)} RON</h2>
                 <span>Send money to any user</span>
                 <br />
                 <br />
-                <br />
-
-                <div className='form-container'>
+                <div className='form-container small'>
                 <form onSubmit={sendMoney}>
+                    <h2 className='headline' style={{
+                        fontSize: '1.4rem',
+                    }}>
+                        Please fill in the details below
+                    </h2>
+                    <br />
+                    <div className='line'></div>
+
                     <SlInput  ref={name} clearable label="Consignee" help-text="Who would you like to send money to?"/>
                     <br />
-                    <SlInput  ref={amount} clearable label="Amount (RON)" help-text="How much money would you like to send?"/>
+                    <SlInput  ref={amount} clearable label="Amount" help-text="How much money would you like to send?"/>
                     <br />
                     <SlInput  ref={description} clearable label="Description" help-text="What is the purpose of this transaction?"/>
                     <br />

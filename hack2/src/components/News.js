@@ -38,11 +38,9 @@ const News = () => {
     }, []);
 
     console.log(news.results);
-    // 2. Create the JSX for the News component
     return (
         <>
         <Navbar />
-        <Chat />
         <Container className='home-container'>
             
             <div className='form-container'>

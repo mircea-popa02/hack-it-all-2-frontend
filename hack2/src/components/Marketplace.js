@@ -19,6 +19,7 @@ import "./Marketplace.css";
 import GoldCard from "./GoldCard";
 import PlatinumCard from "./PlatinumCard";
 import ONGlist from "./ONGlist";
+import GreenLoans from "./GreenLoans";
 
 const DUMMY_DATA = [
   {
@@ -139,6 +140,9 @@ const Marketplace = () => {
         </Tab>
         <Tab eventKey="grants" title="Create impact">
           <ONGlist />
+        </Tab>
+        <Tab eventKey="loans" title="Green Loans">
+          <GreenLoans />
         </Tab>
       </Tabs>
     </>

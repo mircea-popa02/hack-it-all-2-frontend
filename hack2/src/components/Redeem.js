@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 
 
 import './Redeem.css';
+import Footer from './Footer';
 
 const VerificationCodeInput = () => {
   const inputRef = useRef([]);
@@ -88,33 +89,35 @@ const VerificationCodeInput = () => {
             <img src={background} alt="background" />
             <div className='background-whitefade'></div>
         </div>
-        <Container className='redeem-container d-flex justify-content-center align-items-center'>
+        <Container className='redeem-container'>
             <div onPaste={handlePaste}>
-            <h1 className='headline'>Redeem code</h1>
-            <p>
-                Here you can redeem your<strong> volunteering rewards</strong>. Enter the code you received from your volunteering organization.
-            </p>
-            {code.map((num, index) => (
-                <input
-                key={index}
-                ref={(el) => (inputRef.current[index] = el)}
-                type="text"
-                maxLength="1"
-                value={num}
-                onChange={(e) => handleChange(e.target, index)}
-                onKeyDown={(e) => e.key === 'Backspace' && handleBackspace(e.target, index)}
-                onFocus={(e) => e.target.select()}
-                style={{ width: '4rem', height: '4rem', textAlign: 'center', marginRight: '0.5rem', fontSize: '2rem', borderRadius: '5px', border: '1px solid #ced4da', boxShadow: '0 0 10px #ced4da' }}
-                />
-            ))}
-            <br></br>
-            <br></br>
-            <div>
-                 <p className='d-flex flex-row' >
-                    Get <div className='d-flex align-items-center' style={{paddingLeft: '4px'}}><strong>Coins</strong> <sl-icon name="coin" style={{paddingRight: '4px'}}></sl-icon></div>to buy products from the<strong style={{paddingLeft: '4px'}}>Marketplace</strong>
+                <h1 className='headline'>Redeem code</h1>
+                <p>
+                    Here you can redeem your<strong> volunteering rewards</strong>. Enter the code you received from your volunteering organization.
                 </p>
-                <Button onClick={sendCode}>Redeem</Button>
-            </div>
+                <div className='inputs d-flex flex-row align-items-center justify-content-center'>
+                    {code.map((num, index) => (
+                        <input
+                        key={index}
+                        ref={(el) => (inputRef.current[index] = el)}
+                        type="text"
+                        maxLength="1"
+                        value={num}
+                        onChange={(e) => handleChange(e.target, index)}
+                        onKeyDown={(e) => e.key === 'Backspace' && handleBackspace(e.target, index)}
+                        onFocus={(e) => e.target.select()}
+                        style={{ width: '4rem', height: '4rem', textAlign: 'center', marginRight: '0.5rem', fontSize: '2rem', borderRadius: '5px', border: '1px solid #ced4da', boxShadow: '0 0 10px #ced4da' }}
+                        />
+                    ))}
+                </div>
+                <br></br>
+                <br></br>
+                <div>
+                    <p className='d-flex flex-row'>
+                        With <div className='d-flex align-items-center' style={{paddingLeft: '4px', paddingRight:'4px'}}><strong>Coins</strong> <sl-icon name="coin" style={{paddingLeft: '4px'}}></sl-icon></div>you can buy products from the<strong style={{paddingLeft: '4px'}}>Marketplace</strong>
+                    </p>
+                    <Button onClick={sendCode} id="but-2">Redeem</Button>
+                </div>
             </div>
         </Container>
     </>

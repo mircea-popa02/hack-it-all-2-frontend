@@ -3,7 +3,9 @@ import AuthContext from './AuthContext';
 import { useEffect } from 'react';
 import { useState } from 'react';
 
-import background from './bg.jpg';
+import basic from './bg.jpg';
+import gold from './gold.png';
+import platinum from './black.png';
 
 // import bootstrap button and 
 import { Container } from 'react-bootstrap';
@@ -30,6 +32,7 @@ const Home = () => {
     const [expenses, setExpenses] = useState([]);
     const [balance, setBalance] = useState(0);
     const [coins, setCoins] = useState(0);
+    const [accountType, setAccountType] = useState('basic');
 
 
     useEffect(() => {
@@ -55,7 +58,6 @@ const Home = () => {
             }
             )
             .then(data => {
-                console.log(data);
                 setIncome(data.incomes);
                 setExpenses(data.expenses);
             }
@@ -85,6 +87,7 @@ const Home = () => {
                 console.log(data);
                 setBalance(data.user.balance);
                 setCoins(data.user.coins);
+                setAccountType(data.user.accountType);
             }
             )
             .catch(err => {
@@ -184,10 +187,33 @@ const Home = () => {
     return (
         <>
             <AppNavbar />
-            <div className='background'>
+            {/* <div className='background'>
                 <img src={background} alt="background" />
                 <div className='background-whitefade'></div>
-            </div>
+            </div> */}
+
+            {accountType === 'basic' && (
+                <div className='background'>
+                    <img src={basic} alt="background" />
+                    <div className='background-whitefade'></div>
+                </div>
+            )}
+
+            {accountType === 'gold' && (
+                <div className='background'>
+                    <img src={gold} alt="background" />
+                    <div className='background-whitefade'></div>
+                </div>
+            )}
+
+            {accountType === 'platinum' && (
+                <div className='background'>
+                    <img src={platinum} alt="background" />
+                    <div className='background-whitefade'></div>
+                </div>
+            )}
+
+
             <Container className='home-container '>
                 <div className='balance-container small'>
                     {authContext.isLoggedIn && (

@@ -19,8 +19,8 @@ const AppNavbar = () => {
             className="d-inline-block align-top"
             alt="Fintech logo"
           />
-          <span style={{ color: "#0018A8", fontWeight: "bold" }}>
-            Create Impact
+          <span style={{ color: "#0018A8", fontWeight: "bold", paddingLeft: '4px' }}>
+            eBanking
           </span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -29,10 +29,10 @@ const AppNavbar = () => {
             <Nav.Link href="/home">Home</Nav.Link>
             <Nav.Link href="/profile">Profile</Nav.Link>
             <Nav.Link href="/transactions">Transactions</Nav.Link>
-            <Nav.Link href="/news">News</Nav.Link>
+            <Nav.Link href="/marketplace">Marketplace</Nav.Link>
             <Nav.Link href="http://localhost:5173/">Earn Coins</Nav.Link>
             <Nav.Link href="/action">
-              <Button variant="danger" onClick={authContext.onLogout}>
+              <Button variant="danger" onClick={authContext.onLogout} id="but">
                 Logout
               </Button>
             </Nav.Link>

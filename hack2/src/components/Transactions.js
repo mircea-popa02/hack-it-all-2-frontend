@@ -114,7 +114,11 @@ const Transactions = () => {
                             title: 'Success',
                             text: 'Transaction sent',
                         })
+                        .then(() => {
+                            window.location.href = '/home';
+                        })
                     })
+                    
                     .catch(err => {
                         console.log(err);
                     }
@@ -164,7 +168,7 @@ const Transactions = () => {
                         <option value="Other">Other</option>
                     </Form.Select>
                     <br />
-                    <Button variant="primary" type="submit">
+                    <Button variant="primary" type="submit" id='but-2'>
                         Submit
                     </Button>
                 </form>

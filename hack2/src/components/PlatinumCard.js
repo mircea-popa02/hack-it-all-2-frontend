@@ -1,6 +1,7 @@
 import React from "react";
 import "./PlatinumCard.css"; // This will be your CSS file where you will write styles for the card
 import { Button } from "react-bootstrap";
+import Swal from "sweetalert2";
 
 const PlatinumCard = () => {
 
@@ -12,6 +13,49 @@ const PlatinumCard = () => {
 
   const handleMouseLeave = () => {
     setIsHovered(false);
+  };
+
+  const product = {
+    id: "Platinum Membership 30 days",
+    price: 99,
+  };
+
+  const buyItem = () => {
+    console.log("buying item");
+    const url = "http://localhost:5000/api/payments/buyItem";
+    const payload = {
+      uid: localStorage.getItem("token"),
+      price: product.price,
+      name: product.id,
+    };
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json()
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: res.message,
+            })
+            throw new Error('Something went wrong');
+        }
+      })
+      .then(data => {
+        Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: data.message,
+        }).then(() => {
+            window.location.href = '/home';
+        })
+      })
   };
   return (
     <>
@@ -26,7 +70,7 @@ const PlatinumCard = () => {
 
             <div>
               <p>Unlock all the benefits and features</p>
-              <Button className="" id="but-2">Go Platinum</Button>
+              <Button className="" id="but-2"onClick={() => buyItem()}>Go Platinum</Button>
             </div>
           </div>
 
@@ -35,10 +79,11 @@ const PlatinumCard = () => {
         {isHovered && 
         <div className="membership-info">
           <ul>
-            <li>1% cashback on all purchases</li>
-            <li>1% cashback on all purchases</li>
-            <li>1% cashback on all purchases</li>
-            <li>1% cashback on all purchases</li>
+            <li>Personalized platinum card</li>
+            <li>FREE international transactions</li>
+            <li>4.75% Gross interest on savings</li>
+            <li>Unlimited airport lounge access</li>
+            <li>Trip and event cancellation insurance</li>
           </ul>
         </div>}
       </div>

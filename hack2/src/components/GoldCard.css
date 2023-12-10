@@ -1,48 +1,48 @@
 .gold-card {
   background-color: #ffd700; /* Gold color, will show while the image is loading or if the image fails to load */
   background-image: url("./images/gold-card.png"); /* Path to your background image */
-  background-size: cover; /* Cover the entire space of the element */
-  background-position: center; /* Center the image in the element */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 158px !important; /* Width of the card */
+  height: 100px !important; /* Height of the card */
+  background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
-  border-radius: 10px; /* Rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for a raised card effect */
-  /* color: #333; Text color, can be changed to something that contrasts well with gold */
-  padding: 20px;
-  max-width: 300px; /* Width of the card */
-  margin: 20px auto; /* Center the card */
-  text-align: center; /* Center text */
-  overflow: hidden; /* Ensure the background image does not leak outside the border-radius */
+  background-size: cover; /* Resize the background image to cover the entire container */
 }
 
-.gold-card-inner {
-  display: flex;
-  flex-direction: column; /* Stack elements vertically */
-  align-items: center; /* Align items horizontally */
-  justify-content: center; /* Center items vertically */
+.membership {
+  margin-top: 1rem !important;
+  background-color: #fff !important;
+  position: relative;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  width: 456px;
+  height: 200px;
 }
 
-.gold-card-title {
-  font-size: 24px; /* Large font size for the title */
-  margin-bottom: 10px;
+.membership-text h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0;
 }
 
-.gold-card-text {
-  font-size: 16px; /* Smaller font size for the subtitle */
-  margin-bottom: 20px;
+.membership-info {
+  background-color: #fff !important;
+  position: relative;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  animation: slideDown 0.5s ease-in-out;
+  z-index: -1;
+  transition: 0.2s;
+  width: 456px;
+  padding-top: 16px;
 }
 
-.gold-card-button {
-  background-color: #fff; /* Button color - white is chosen for contrast */
-  color: #ffd700; /* Button text color - gold */
-  border: 2px solid #ffd700; /* Gold border for the button */
-  border-radius: 5px; /* Rounded corners for the button */
-  padding: 10px 20px; /* Padding inside the button */
-  font-size: 18px; /* Button font size */
-  cursor: pointer; /* Pointer cursor on hover */
-  transition: background-color 0.3s, color 0.3s; /* Transition for button hover effect */
-}
-
-.gold-card-button:hover {
-  background-color: #ffd700; /* Button hover color - gold */
-  color: #fff; /* Button text hover color - white */
+@keyframes slideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

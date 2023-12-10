@@ -1,8 +1,10 @@
 import React from "react";
 import { Card, Badge, Button, Row, Col } from "react-bootstrap";
 import "./ONGcard.css";
+import Swal from "sweetalert2";
 
 const ONGcard = (props) => {
+
   return (
     <div className="my-custom-component">
         <div className="d-flex justify-content-between align-items-center">
@@ -23,8 +25,12 @@ const ONGcard = (props) => {
           </Col>
           <Col xs={12} md={9} lg={8}>
             <p>{props.description}</p>
-            <div className="text-muted">{props.location}</div>
-            <Button variant="primary" size="sm" className="mt-2" id="but-2">
+            <div className="text-muted"><sl-icon name="geo-alt"></sl-icon>
+            {props.location}</div>
+            <br></br>
+            <Button variant="primary" size="sm" className="mt-2" id="but-2"
+              // onClick={() => openDonationModal(props.id)}
+              >
               Donate
             </Button>
           </Col>

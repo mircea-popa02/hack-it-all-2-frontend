@@ -16,7 +16,7 @@ const DUMMY_ONGs = [
     description:
       "Prin intermediul activităților organizate ne dorim să schimbăm percepția oamenilor asupra mediului înconjurător, să-i determinăm să fie mai atenți și mai responsabili",
     image: montana,
-    location: "Bucuresti, B, Romania",
+    location: "Bucuresti, Romania",
     link: "https://asociatiamontanacarpati.ro/",
   },
   {
@@ -25,7 +25,7 @@ const DUMMY_ONGs = [
     description:
       "Fundația Conservation Carpathia a fost fondată în anul 2009 de către 12 filantropi și conservaționiști cu scopul de a opri tăierile ilegale de pădure",
     image: carpathia,
-    location: "Bucuresti, B, Romania",
+    location: "Bucuresti, Romania",
     link: "https://www.carpathia.org/ro/",
   },
   {
@@ -34,7 +34,7 @@ const DUMMY_ONGs = [
     description:
       "Grupul Regional pentru Ecologie Europeană şi Natură. Daca vrei sa ni te alaturi, trebuie doar sa ne dai de stire. ",
     image: green,
-    location: "Bucuresti, B, Romania",
+    location: "Bucuresti, Romania",
     link: "https://www.protectiamediului.org/asociatii/green-grupul-regional-pentru-ecologie-europeana-si-natura/",
   },
   {
@@ -43,7 +43,7 @@ const DUMMY_ONGs = [
     description:
       "Programul Spaţii Verzi este o iniţiativă comună a MOL România şi a Fundaţiei pentru Parteneriat lansată în 2006 sub forma unui program ce a urmărit implicarea copiilor şi a tinerilor în proiecte de  amenajare a spaţiilor verzi.",
     image: spatiiverzi,
-    location: "Bucuresti, B, Romania",
+    location: "Bucuresti, Romania",
     link: "https://www.spatiiverzi.org.ro/",
   }
 ];

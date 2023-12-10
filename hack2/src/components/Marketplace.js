@@ -21,7 +21,8 @@ import PlatinumCard from "./PlatinumCard";
 import ONGlist from "./ONGlist";
 
 import Swal from "sweetalert2";
-import Footer from "./Footer";
+
+import { useEffect, useState } from "react";
 
 const DUMMY_DATA = [
   {
@@ -96,6 +97,9 @@ const DUMMY_DATA = [
   },
 ];
 
+// useffect fecth user coins
+
+
 const buyItem = (product) => {
   console.log(product);
   const handleSubmit = () => {
@@ -135,57 +139,83 @@ const buyItem = (product) => {
 }
 
 const Marketplace = () => {
+  const [coins, setCoins] = useState(0);
+
+  useEffect(() => {
+    var url = 'http://localhost:5000/api/users/ceva/' + localStorage.getItem('nume');
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+    .then(res => {
+      return res.json();
+    })
+    .then(data => {
+      setCoins(data.user.coins);
+    })
+    .catch(error => {
+      console.error(error);
+    });
+  }, []);
+
   return (
     <>
       <AppNavbar />
-      <Tabs
-        defaultActiveKey="plans"
-        id="uncontrolled-tab-example"
-        className="mb-3"
-      >
-        <Tab eventKey="plans" title="Plans">
-          <div className="d-flex ">
-            <GoldCard />
-            <PlatinumCard />
-          </div>
-        </Tab>
-        <Tab eventKey="products" title="Products">
-          <Container>
-            <Row>
-              {DUMMY_DATA.map((product) => (
-                <Col md={4} key={product.id} className="mb-2">
-                  <Card style={{ width: "350px", height: "600px" }} id="my-card">
-                    <Card.Img
-                      variant="top"
-                      src={product.image}
-                      className="marketplace-img"
-                    />
-                    <Card.Body>
-                      <div className="d-flex justify-content-between">
-                        <Card.Title>{product.name}</Card.Title>
-                        <Card.Title className="d-flex align-items-center">
-                          {product.price}
-                          <sl-icon
-                            style={{ paddingLeft: "8px" }}
-                            name="coin"
-                          ></sl-icon>
-                        </Card.Title>
-                      </div>
-                      <Card.Text>{product.description}</Card.Text>
-                      <Button variant="primary" id="but-2" onClick={() => buyItem(product)}>Buy</Button>
-                    </Card.Body>
-                  </Card>
-                </Col>
-              ))}
-            </Row>
-          </Container>
-        </Tab>
-        <Tab eventKey="grants" title="Donate">
-          <ONGlist />
-        </Tab>
-      </Tabs>
+      <div className="home-container container">
+        <h1 className="headline">Marketplace</h1>
+        <p>
+          You have <strong>{coins}</strong> Coins <sl-icon name="coin"></sl-icon>
+        </p>
+        <Tabs
+          defaultActiveKey="plans"
+          id="uncontrolled-tab-example"
+          className="mb-3"
+        >
 
-      <Footer></Footer>
+          <Tab eventKey="plans" title="Plans">
+            <div className="d-flex justify-content-evenly align-items-start">
+              <GoldCard />
+              <PlatinumCard />
+            </div>
+          </Tab>
+          <Tab eventKey="products" title="Products">
+            <Container>
+              <Row>
+                {DUMMY_DATA.map((product) => (
+                  <Col md={4} key={product.id} className="mb-4">
+                    <Card style={{ width: "350px", height: "600px" }} id="my-card">
+                      <Card.Img
+                        variant="top"
+                        src={product.image}
+                        className="marketplace-img"
+                      />
+                      <Card.Body>
+                        <div className="d-flex justify-content-between">
+                          <Card.Title>{product.name}</Card.Title>
+                          <Card.Title className="d-flex align-items-center">
+                            {product.price}
+                            <sl-icon
+                              style={{ paddingLeft: "8px" }}
+                              name="coin"
+                            ></sl-icon>
+                          </Card.Title>
+                        </div>
+                        <Card.Text>{product.description}</Card.Text>
+                        <Button variant="primary" id="but-2" onClick={() => buyItem(product)}>Buy</Button>
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                ))}
+              </Row>
+            </Container>
+          </Tab>
+          <Tab eventKey="grants" title="Donate">
+            <ONGlist />
+          </Tab>
+        </Tabs>
+      </div>
     </>
   );
 };

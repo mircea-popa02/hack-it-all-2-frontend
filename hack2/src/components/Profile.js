@@ -41,9 +41,6 @@ const Profile = () => {
 
     const [splitValue, setSplitValue] = useState(0);
 
-    const SERVICE_ID = "service_56d159q";
-    const TEMPLATE_ID = "template_0yyo3hd";
-
     const [income, setIncome] = useState([]);
     const [expenses, setExpenses] = useState([]);
 

@@ -1,24 +1,27 @@
 // import css
+
 import './Profile.css';
 import { useContext, useRef } from 'react';
 import AuthContext from './AuthContext';
 import { Button } from 'react-bootstrap';
 
-import Footer from './Footer';
 
-import Graph from './Graph';
-import Chat from './Chat';
-import DefaultImage from './default-user.jpg';
+import Footer from "./Footer";
 
-import { SlInput } from '@shoelace-style/shoelace/dist/react';
+import Graph from "./Graph";
+import Chat from "./Chat";
+import DefaultImage from "./default-user.jpg";
 
-import { Container } from 'react-bootstrap';
+import { SlInput } from "@shoelace-style/shoelace/dist/react";
 
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { Container } from "react-bootstrap";
 
-import AppNavbar from './AppNavbar';
-import Swal from 'sweetalert2';
+import { useEffect } from "react";
+import { useState } from "react";
+
+import AppNavbar from "./AppNavbar";
+import Swal from "sweetalert2";
+
 
 import basic from './bg.jpg';
 import gold from './gold.png';
@@ -44,13 +47,13 @@ const Profile = () => {
     const SERVICE_ID = "service_56d159q";
     const TEMPLATE_ID = "template_0yyo3hd";
 
-    const [income, setIncome] = useState([]);
-    const [expenses, setExpenses] = useState([]);
 
-    useEffect(() => {
-        var url = "http://localhost:5000/api/payments/ceva/";
+  const splitRefDesc = useRef();
 
-        url += localStorage.getItem("token");
+  const [splitDesc, setSplitDesc] = useState("");
+
+  const splitRef = useRef();
+
 
         fetch(url, {
             method: "GET",
@@ -83,49 +86,120 @@ const Profile = () => {
                 setPremiumAccountStartDate(data.user.premiumAccountStartDate);
             })
 
-        fetch("http://localhost:5000/api/groups/643185b22613671bb452c29d", {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
+  const SERVICE_ID = "service_56d159q";
+  const TEMPLATE_ID = "template_0yyo3hd";
+
+  const [income, setIncome] = useState([]);
+  const [expenses, setExpenses] = useState([]);
+
+  useEffect(() => {
+    var url = "http://localhost:5000/api/payments/ceva/";
+
+    url += localStorage.getItem("token");
+
+    fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          throw new Error("Something went wrong");
+        }
+      })
+      .then((data) => {
+        console.log(data);
+        setIncome(data.incomes);
+        setExpenses(data.expenses);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    fetch(
+      "http://localhost:5000/api/users/ceva/" + localStorage.getItem("nume")
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setAccountLimit(data.user.accountlimit);
+      });
+
+    fetch("http://localhost:5000/api/groups/643185b22613671bb452c29d", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          throw new Error("Something went wrong");
+        }
+      })
+      .then((data) => {
+        console.log(data);
+        setGroup(data.groupWithMembers);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const setLimit = (e) => {
+    e.preventDefault();
+
+    const limita = limit.current.value;
+    console.log(limita);
+
+    setLimita("");
+
+    const url =
+      "http://localhost:5000/api/users/" + localStorage.getItem("token");
+    fetch(url, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        accountlimit: limita,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setAccountLimit(data.user.accountlimit);
+      });
+  };
+
+  const makeSplitPayment = (e) => {
+    e.preventDefault();
+    const splitValueNew = splitRef.current.value;
+    const splitDescNew = splitRefDesc.current.value;
+    console.log(splitValue);
+    setSplitValue(0);
+
+    const promises = [];
+    for (let i = 0; i < group.length; i++) {
+      promises.push(
+        fetch(`http://localhost:5000/api/payments/`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            value: splitValueNew / group.length,
+            creator: group[i]._id,
+            description: splitDescNew,
+            type: "Split",
+            destination: "6431ed1a8deaff540c2022e6",
+          }),
         })
-            .then(res => {
-                if (res.ok) {
-                    return res.json();
-                } else {
-                    throw new Error('Something went wrong');
-                }
-            }
-            )
-            .then(data => {
-                console.log(data);
-                setGroup(data.groupWithMembers)
-            }
-            )
-            .catch(err => {
-                console.log(err);
-            }
-            )
-    }, [])
 
-    const setLimit = (e) => {
-        e.preventDefault();
-
-        const limita = limit.current.value;
-        console.log(limita);
-
-        setLimita('');
-
-        const url = 'http://localhost:5000/api/users/' + localStorage.getItem('token');
-        fetch(url, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                accountlimit: limita
-            })
-        })
             .then(res => res.json())
             .then(data => {
                 console.log(data);

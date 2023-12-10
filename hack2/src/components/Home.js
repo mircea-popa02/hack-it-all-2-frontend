@@ -1,29 +1,30 @@
-import { useContext } from 'react';
-import AuthContext from './AuthContext';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useContext } from "react";
+import AuthContext from "./AuthContext";
+import { useEffect } from "react";
+import { useState } from "react";
+
 
 import basic from './bg.jpg';
 import gold from './gold.png';
 import platinum from './black.png';
 
-// import bootstrap button and 
-import { Container } from 'react-bootstrap';
+// import bootstrap button and
+import { Container } from "react-bootstrap";
 
-import AppNavbar from './AppNavbar';
-import Redeem from './Redeem';
+import AppNavbar from "./AppNavbar";
+import Redeem from "./Redeem";
 //import css
-import './Home.css';
-import { SlFormatDate } from '@shoelace-style/shoelace/dist/react';
+import "./Home.css";
+import { SlFormatDate } from "@shoelace-style/shoelace/dist/react";
 
-import Chat from './Chat';
+import Chat from "./Chat";
 
-import Footer from './Footer';
+import Footer from "./Footer";
 
-import Swal from 'sweetalert2';
-import { NavLink } from 'react-router-dom';
+import Swal from "sweetalert2";
+import { NavLink } from "react-router-dom";
 
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col } from "react-bootstrap";
 
 const Home = () => {
 
@@ -69,39 +70,44 @@ const Home = () => {
 
         var url = "http://localhost:5000/api/users/ceva/" + localStorage.getItem('nume');
         fetch(url, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            value: amount,
+            type: "income",
+            destination: localStorage.getItem("token"),
+            description: "Added money via app",
+          }),
         })
-
-            .then(res => {
-                if (res.ok) {
-                    return res.json();
-                } else {
-                    throw new Error('Something went wrong');
-                }
+          .then((res) => {
+            if (res.ok) {
+              return res.json();
+            } else {
+              throw new Error("Something went wrong");
             }
+
             )
             .then(data => {
                 console.log(data);
                 setBalance(data.user.balance);
                 setCoins(data.user.coins);
                 setAccountType(data.user.accountType);
+
             }
-            )
-            .catch(err => {
-                console.log(err);
-            })
-
-
-    }, [])
-
-
-    // sort expenses by date
-    expenses.sort((a, b) => {
-        return new Date(b.date) - new Date(a.date);
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+          .finally(() => {
+            window.location.reload();
+          });
+      },
+    }).finally(() => {
+      window.location.reload();
     });
+
 
     // sort incomes by date
     incomes.sort((a, b) => {
@@ -250,57 +256,66 @@ const Home = () => {
                             </div>
                         </NavLink>
 
-                        <NavLink to='/action'>
-                            <div className='group-button d-flex flex-column align-items-center'>
-                                <div className='round-button d-flex'>
-                                    <sl-icon name="award"></sl-icon>
-                                </div>
-                                <p>Redeem</p>
-                            </div>
-                        </NavLink>
-                    </div>
+            <NavLink to="/transactions">
+              <div className="group-button d-flex flex-column align-items-center">
+                <div className="round-button d-flex">
+                  <sl-icon name="arrow-up-right"></sl-icon>
                 </div>
-                <br></br>
-                {expenses.length > 0 && (
-                    <div className='balance-container'>
-                        <h1 className='headline'>Recent transactions</h1>
-                        <p>
-                            Here you can see your recent transactions
-                        </p>
-                        <div className='line'></div>
-                        <Col>
-                            {expenses.map((expense) => (
-                                <>
-                                    <div className='expense card-container d-flex' key={expense._id}>
-                                        <h3>-{(expense.value).toFixed(2)}</h3>
-                                        <Col>
-                                            <strong>{expense.type}</strong>
-                                            <p>{expense.description}</p>
-                                        </Col>
-                                        <SlFormatDate date={expense.date} className='date' />
-                                    </div>
-                                </>
-                            ))}
-                        </Col>
-                        <Col>
-                            {incomes.map((income) => (
-                                <div className='income card-container d-flex' key={income._id}>
-                                    <h3>+{(income.value).toFixed(2)} </h3>
-                                    <Col>
-                                        <strong>{income.type}</strong>
-                                        <p>{income.description}</p>
-                                    </Col>
-                                    <SlFormatDate date={income.date} className='date'/>
-                                </div>
-                            ))}
-                        </Col>
-                    </div>
-                )}
-            </Container >
-            <Footer/>
-        </>
+                <p>Send</p>
+              </div>
+            </NavLink>
 
-    );
-}
+            <NavLink to="/action">
+              <div className="group-button d-flex flex-column align-items-center">
+                <div className="round-button d-flex">
+                  <sl-icon name="award"></sl-icon>
+                </div>
+                <p>Redeem</p>
+              </div>
+            </NavLink>
+          </div>
+        </div>
+        <br></br>
+        {expenses.length > 0 && (
+          <div className="balance-container">
+            <h1 className="headline">Recent transactions</h1>
+            <p>Here you can see your recent transactions</p>
+            <div className="line"></div>
+            <Col>
+              {expenses.map((expense) => (
+                <>
+                  <div
+                    className="expense card-container d-flex"
+                    key={expense._id}
+                  >
+                    <h3>-{expense.value.toFixed(2)}</h3>
+                    <Col>
+                      <strong>{expense.type}</strong>
+                      <p>{expense.description}</p>
+                    </Col>
+                    <SlFormatDate date={expense.date} className="date" />
+                  </div>
+                </>
+              ))}
+            </Col>
+            <Col>
+              {incomes.map((income) => (
+                <div className="income card-container d-flex" key={income._id}>
+                  <h3>+{income.value.toFixed(2)} </h3>
+                  <Col>
+                    <strong>{income.type}</strong>
+                    <p>{income.description}</p>
+                  </Col>
+                  <SlFormatDate date={income.date} className="date" />
+                </div>
+              ))}
+            </Col>
+          </div>
+        )}
+      </Container>
+      <Footer />
+    </>
+  );
+};
 
 export default Home;

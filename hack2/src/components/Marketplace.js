@@ -19,7 +19,6 @@ import "./Marketplace.css";
 import GoldCard from "./GoldCard";
 import PlatinumCard from "./PlatinumCard";
 import ONGlist from "./ONGlist";
-import GreenLoans from "./GreenLoans";
 
 import Swal from "sweetalert2";
 import Footer from "./Footer";
@@ -183,9 +182,6 @@ const Marketplace = () => {
         </Tab>
         <Tab eventKey="grants" title="Donate">
           <ONGlist />
-        </Tab>
-        <Tab eventKey="loans" title="Green Loans">
-          <GreenLoans />
         </Tab>
       </Tabs>
 

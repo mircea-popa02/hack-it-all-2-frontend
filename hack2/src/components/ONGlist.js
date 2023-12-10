@@ -6,19 +6,12 @@ import carpathia from "./images/carpathia.png";
 import green from "./images/green.png";
 import React from "react";
 import { useState } from "react";
+import { SlInput } from "@shoelace-style/shoelace/dist/react";
 
 const DUMMY_ONGs = [
+
   {
     id: "ong1",
-    name: "Asociatia Spatii Verzi",
-    description:
-      "Programul Spaţii Verzi este o iniţiativă comună a MOL România şi a Fundaţiei pentru Parteneriat lansată în 2006 sub forma unui program ce a urmărit implicarea copiilor şi a tinerilor în proiecte de  amenajare a spaţiilor verzi.",
-    image: spatiiverzi,
-    location: "Bucuresti, B, Romania",
-    link: "https://www.spatiiverzi.org.ro/",
-  },
-  {
-    id: "ong2",
     name: "Asociatia Montana Carpati",
     description:
       "Prin intermediul activităților organizate ne dorim să schimbăm percepția oamenilor asupra mediului înconjurător, să-i determinăm să fie mai atenți și mai responsabili",
@@ -27,7 +20,7 @@ const DUMMY_ONGs = [
     link: "https://asociatiamontanacarpati.ro/",
   },
   {
-    id: "ong3",
+    id: "ong2",
     name: "Asociatia Carpathia",
     description:
       "Fundația Conservation Carpathia a fost fondată în anul 2009 de către 12 filantropi și conservaționiști cu scopul de a opri tăierile ilegale de pădure",
@@ -36,7 +29,7 @@ const DUMMY_ONGs = [
     link: "https://www.carpathia.org/ro/",
   },
   {
-    id: "ong4",
+    id: "ong3",
     name: "Asociatia GREEN",
     description:
       "Grupul Regional pentru Ecologie Europeană şi Natură. Daca vrei sa ni te alaturi, trebuie doar sa ne dai de stire. ",
@@ -44,6 +37,15 @@ const DUMMY_ONGs = [
     location: "Bucuresti, B, Romania",
     link: "https://www.protectiamediului.org/asociatii/green-grupul-regional-pentru-ecologie-europeana-si-natura/",
   },
+  {
+    id: "ong4",
+    name: "Asociatia Spatii Verzi",
+    description:
+      "Programul Spaţii Verzi este o iniţiativă comună a MOL România şi a Fundaţiei pentru Parteneriat lansată în 2006 sub forma unui program ce a urmărit implicarea copiilor şi a tinerilor în proiecte de  amenajare a spaţiilor verzi.",
+    image: spatiiverzi,
+    location: "Bucuresti, B, Romania",
+    link: "https://www.spatiiverzi.org.ro/",
+  }
 ];
 
 const ONGlist = () => {
@@ -54,12 +56,12 @@ const ONGlist = () => {
   );
   return (
     <div className="ong-container">
-      <input
+      <SlInput
         type="text"
-        placeholder="Search ONGs..."
+        placeholder="Search"
         value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-        style={{ margin: "10px", padding: "5px", fontSize: "1em" }}
+        onInput={(e) => setSearchQuery(e.target.value)}
+        helpText="Find ONGs by name"
       />
       {filteredONGs.map((ong) => (
         <ONGcard

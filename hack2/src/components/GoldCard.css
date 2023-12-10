@@ -6,12 +6,11 @@
   background-repeat: no-repeat; /* Do not repeat the image */
   border-radius: 10px; /* Rounded corners */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for a raised card effect */
-  color: #333; /* Text color, can be changed to something that contrasts well with gold */
+  /* color: #333; Text color, can be changed to something that contrasts well with gold */
   padding: 20px;
   max-width: 300px; /* Width of the card */
   margin: 20px auto; /* Center the card */
   text-align: center; /* Center text */
-  font-family: "Arial", sans-serif; /* Font family can be changed */
   overflow: hidden; /* Ensure the background image does not leak outside the border-radius */
 }
 

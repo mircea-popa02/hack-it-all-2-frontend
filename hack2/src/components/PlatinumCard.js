@@ -1,5 +1,6 @@
 import React from "react";
 import "./PlatinumCard.css"; // This will be your CSS file where you will write styles for the card
+import { Button } from "react-bootstrap";
 
 const PlatinumCard = () => {
   return (
@@ -9,7 +10,7 @@ const PlatinumCard = () => {
         <p className="platinum-card-text">
           Unlock exclusive benefits and features
         </p>
-        <button className="platinum-card-button">Go Platinum</button>
+        <Button className="" id="but-2">Go Platinum</Button>
       </div>
     </div>
   );

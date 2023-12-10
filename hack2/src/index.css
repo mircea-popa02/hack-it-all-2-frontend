@@ -28,3 +28,25 @@ code {
 p {
   color: grey;
 }
+
+
+#but {
+  border-radius: 96px !important;
+  padding: 12px 20px  !important;
+}
+
+#but-2 {
+  border-radius: 96px !important;
+  background-color: #0018a8 !important;
+  padding: 12px 20px  !important;
+  border: none !important;
+}
+
+#my-card {
+  margin-top: 1rem !important;
+  background-color: #fff !important;
+  padding: 16px;
+  position: relative;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 0;
+}

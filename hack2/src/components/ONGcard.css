@@ -1,5 +1,32 @@
 .my-custom-component {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add shadow for card */
-  border-radius: 15px; /* Rounded corners */
-  /* Add more styles as per your requirement */
+  margin-top: 1rem !important;
+  background-color: #fff !important;
+  padding: 16px;
+  position: relative;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  width: 600px;
 }
+
+.my-badge {
+  background-color: #0098db !important;
+  color: white !important;
+  font-size: x-small;
+  padding: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
+  border-radius: 16px;
+}
+
+.my-headline {
+  font-size: 1.5rem !important;
+  margin-bottom: 0 !important;
+}
+
+.my-input {
+  border-radius: 4px !important;
+  border: 1px solid #e0e0e0 !important;
+  padding: 8px !important;
+  margin-bottom: 16px !important;
+}
+
+

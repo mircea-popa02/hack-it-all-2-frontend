@@ -21,6 +21,9 @@ import PlatinumCard from "./PlatinumCard";
 import ONGlist from "./ONGlist";
 import GreenLoans from "./GreenLoans";
 
+import Swal from "sweetalert2";
+import Footer from "./Footer";
+
 const DUMMY_DATA = [
   {
     id: "product1",
@@ -94,6 +97,44 @@ const DUMMY_DATA = [
   },
 ];
 
+const buyItem = (product) => {
+  console.log(product);
+  const handleSubmit = () => {
+    fetch("http://localhost:5000/api/payments/buyItem", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        uid: localStorage.getItem("token"),
+        price: product.price,
+        name: product.name
+      }),
+    }).then(res => {
+      if (res.ok) {
+          return res.json()
+      } else {
+          Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: res.message,
+          })
+          throw new Error('Something went wrong');
+      }
+    })
+    .then(data => {
+        Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: data.message,
+        }).then(() => {
+            window.location.href = '/home';
+        })
+    })
+  }
+  handleSubmit();
+}
+
 const Marketplace = () => {
   return (
     <>
@@ -104,15 +145,17 @@ const Marketplace = () => {
         className="mb-3"
       >
         <Tab eventKey="plans" title="Plans">
-          <GoldCard />
-          <PlatinumCard />
+          <div className="d-flex ">
+            <GoldCard />
+            <PlatinumCard />
+          </div>
         </Tab>
         <Tab eventKey="products" title="Products">
           <Container>
             <Row>
               {DUMMY_DATA.map((product) => (
-                <Col md={4} key={product.id} className="mb-4">
-                  <Card style={{ width: "100%" }}>
+                <Col md={4} key={product.id} className="mb-2">
+                  <Card style={{ width: "350px", height: "600px" }} id="my-card">
                     <Card.Img
                       variant="top"
                       src={product.image}
@@ -130,7 +173,7 @@ const Marketplace = () => {
                         </Card.Title>
                       </div>
                       <Card.Text>{product.description}</Card.Text>
-                      <Button variant="primary">Purchase</Button>
+                      <Button variant="primary" id="but-2" onClick={() => buyItem(product)}>Buy</Button>
                     </Card.Body>
                   </Card>
                 </Col>
@@ -138,13 +181,15 @@ const Marketplace = () => {
             </Row>
           </Container>
         </Tab>
-        <Tab eventKey="grants" title="Create impact">
+        <Tab eventKey="grants" title="Donate">
           <ONGlist />
         </Tab>
         <Tab eventKey="loans" title="Green Loans">
           <GreenLoans />
         </Tab>
       </Tabs>
+
+      <Footer></Footer>
     </>
   );
 };

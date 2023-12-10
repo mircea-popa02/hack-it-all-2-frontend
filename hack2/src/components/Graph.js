@@ -55,8 +55,6 @@ const Graph = () => {
             })
     }, [])
 
-
-    // sum all expenses
     var sum = 0;
     let food = 0;
     let other = 0;
@@ -103,9 +101,6 @@ const Graph = () => {
         sum2 += incomes[i].value;
     }
 
-
-
-
     const options = {
         animationEnabled: true,
         exportEnabled: true,
@@ -121,26 +116,13 @@ const Graph = () => {
         }]
     }
 
-    // const options2 = {
-    //     animationEnabled: true,
-    //     exportEnabled: true,
-    //     theme: "ligh1", // "light1", "dark1", "dark2"
-    //     title: {
-    //     },
-    //     colorSet: "greenShades",
-    //     data: [{
-    //         type: "pie",
-    //         indexLabel: "{label}: {y}%",
-    //         startAngle: -90,
-    //         dataPoints: dataPoints2
-    //     }]
-    // }
-
-
     return (
         <>
+            {expenses.length > 0 ?
             <CanvasJSChart options={options} />
-            {/* <CanvasJSChart options={options2} /> */}
+            :
+            <p>You have made no payments in the last 30 days.</p>
+            }
         </>
     );
 

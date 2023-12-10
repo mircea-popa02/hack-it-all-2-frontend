@@ -3,7 +3,10 @@ import AuthContext from "./AuthContext";
 import { useEffect } from "react";
 import { useState } from "react";
 
-import background from "./bg.jpg";
+
+import basic from './bg.jpg';
+import gold from './gold.png';
+import platinum from './black.png';
 
 // import bootstrap button and
 import { Container } from "react-bootstrap";
@@ -24,98 +27,48 @@ import { NavLink } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
 
 const Home = () => {
-  const authContext = useContext(AuthContext);
-  const [incomes, setIncome] = useState([]);
-  const [expenses, setExpenses] = useState([]);
-  const [balance, setBalance] = useState(0);
-  const [coins, setCoins] = useState(0);
 
-  useEffect(() => {
-    console.log(authContext);
+    const authContext = useContext(AuthContext);
+    const [incomes, setIncome] = useState([]);
+    const [expenses, setExpenses] = useState([]);
+    const [balance, setBalance] = useState(0);
+    const [coins, setCoins] = useState(0);
+    const [accountType, setAccountType] = useState('basic');
 
-    var url = "http://localhost:5000/api/payments/ceva/";
 
-    url += localStorage.getItem("token");
+    useEffect(() => {
+        console.log(authContext);
 
-    fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          throw new Error("Something went wrong");
-        }
-      })
-      .then((data) => {
-        console.log(data);
-        setIncome(data.incomes);
-        setExpenses(data.expenses);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+        var url = 'http://localhost:5000/api/payments/ceva/';
 
-    var url =
-      "http://localhost:5000/api/users/ceva/" + localStorage.getItem("nume");
-    fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          throw new Error("Something went wrong");
-        }
-      })
-      .then((data) => {
-        console.log(data);
-        setBalance(data.user.balance);
-        setCoins(data.user.coins);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [balance]);
+        url += localStorage.getItem('token');
 
-  // sort expenses by date
-  expenses.sort((a, b) => {
-    return new Date(b.date) - new Date(a.date);
-  });
 
-  // sort incomes by date
-  incomes.sort((a, b) => {
-    return new Date(b.date) - new Date(a.date);
-  });
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+            .then(res => {
+                if (res.ok) {
+                    return res.json();
+                } else {
+                    throw new Error('Something went wrong');
+                }
+            }
+            )
+            .then(data => {
+                setIncome(data.incomes);
+                setExpenses(data.expenses);
+            }
+            )
+            .catch(err => {
+                console.log(err);
+            })
 
-  // merge expenses and incomes
-  const all = [...expenses, ...incomes];
 
-  // sort all by date
-  all.sort((a, b) => {
-    return new Date(b.date) - new Date(a.date);
-  });
-
-  useEffect(() => {}, []);
-
-  const addMoney = () => {
-    Swal.fire({
-      title: "Add money",
-      input: "number",
-      // inputLabel: 'Amount',
-      inputPlaceholder: "Enter the amount",
-      showCancelButton: true,
-      confirmButtonText: "Add",
-      showLoaderOnConfirm: true,
-      preConfirm: (amount) => {
-        console.log(amount);
-        var url = "http://localhost:5000/api/payments/ing/";
+        var url = "http://localhost:5000/api/users/ceva/" + localStorage.getItem('nume');
         fetch(url, {
           method: "POST",
           headers: {
@@ -134,25 +87,14 @@ const Home = () => {
             } else {
               throw new Error("Something went wrong");
             }
-          })
-          .then((data) => {
-            console.log(data);
-            setBalance((prevBalance) => prevBalance + Number(amount));
-            window.Email.send({
-              Host: "smtp.elasticemail.com",
-              Username: "pmircea027@gmail.com",
-              Password: "5899E82B668DCCCCB2F780F83DEBF239F496",
-              To: "mci42@yahoo.com",
-              From: "pmircea027@gmail.com",
-              Subject: "Payment confirmation",
-              Body: "And this is the body",
-            });
-          })
-          .then((result) => {
-            if (result.isConfirmed) {
-              // Only reload the page if the user confirmed the action
-              // and after the balance update operation is complete.
-              window.location.reload();
+
+            )
+            .then(data => {
+                console.log(data);
+                setBalance(data.user.balance);
+                setCoins(data.user.coins);
+                setAccountType(data.user.accountType);
+
             }
           })
           .catch((err) => {
@@ -165,52 +107,154 @@ const Home = () => {
     }).finally(() => {
       window.location.reload();
     });
-  };
 
-  const [open, setOpen] = useState(false);
-  return (
-    <>
-      <AppNavbar />
-      <div className="background">
-        <img src={background} alt="background" />
-        <div className="background-whitefade"></div>
-      </div>
-      <Container className="home-container ">
-        <div className="balance-container small">
-          {authContext.isLoggedIn && (
-            <>
-              <span>
-                Welcome, <strong>{localStorage.getItem("nume")}</strong>
-              </span>
-            </>
-          )}
-          <h1 className="headline">
-            Total Balance <sl-icon name="currency-exchange"></sl-icon>
-          </h1>
-          <div className="line"></div>
-          <div className="d-flex justify-content-center">
-            <h2 className="user-name coins">
-              {balance.toFixed(2)} <p className=""> RON</p>
-            </h2>
-            <h2 className="user-name coins">
-              {coins}
-              <p className="d-flex align-items-center">
-                Coins{" "}
-                <sl-icon name="coin" style={{ paddingLeft: "8px" }}></sl-icon>
-              </p>
-            </h2>
-          </div>
-          <br></br>
-          <div className="d-flex button-container align-items-center justify-content-around quick">
-            <div
-              className="group-button d-flex flex-column align-items-center"
-              onClick={addMoney}
-            >
-              <div className="round-button d-flex">
-                <sl-icon name="plus" size="large" />
-              </div>
-              <p>Add</p>
-            </div>
+
+    // sort incomes by date
+    incomes.sort((a, b) => {
+        return new Date(b.date) - new Date(a.date);
+    });
+
+    // merge expenses and incomes
+    const all = [...expenses, ...incomes];
+
+    // sort all by date
+    all.sort((a, b) => {
+        return new Date(b.date) - new Date(a.date);
+    });
+
+
+    useEffect(() => {
+
+    }, []);
+
+
+    const addMoney = () => {
+        Swal.fire
+            ({
+                title: 'Add money',
+                input: 'number',
+                // inputLabel: 'Amount',
+                inputPlaceholder: 'Enter the amount',
+                showCancelButton: true,
+                confirmButtonText: 'Add',
+                showLoaderOnConfirm: true,
+                preConfirm: (amount) => {
+                    console.log(amount);
+                    var url = 'http://localhost:5000/api/payments/ing/';
+                    fetch(url, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        }
+                        ,
+                        body: JSON.stringify({
+                            value: amount,
+                            type: 'income',
+                            destination: localStorage.getItem('token'),
+                            description: 'Added money via app'
+                        })
+                    })
+                        .then(res => {
+                            if (res.ok) {
+                                return res.json();
+                            } else {
+                                throw new Error('Something went wrong');
+                            }
+                        }
+                        )
+                        .then(data => {
+                            console.log(data);
+                            setBalance(balance + +amount);
+                            window.Email.send({
+                                Host: "smtp.elasticemail.com",
+                                Username: "pmircea027@gmail.com",
+                                Password: "5899E82B668DCCCCB2F780F83DEBF239F496",
+                                To: "mci42@yahoo.com",
+                                From: "pmircea027@gmail.com",
+                                Subject: "Payment confirmation",
+                                Body: "And this is the body"
+                            }).then(
+                                // refresh
+                                window.location.reload()
+                            );
+                        }
+                        )
+                        .catch(err => {
+                            console.log(err);
+                        })
+                }
+            })
+            .finally(() => {
+                window.location.reload();
+            })
+    }
+
+    const [open, setOpen] = useState(false);
+    return (
+        <>
+            <AppNavbar />
+            {/* <div className='background'>
+                <img src={background} alt="background" />
+                <div className='background-whitefade'></div>
+            </div> */}
+
+            {accountType === 'basic' && (
+                <div className='background'>
+                    <img src={basic} alt="background" />
+                    <div className='background-whitefade'></div>
+                </div>
+            )}
+
+            {accountType === 'gold' && (
+                <div className='background'>
+                    <img src={gold} alt="background" />
+                    <div className='background-whitefade'></div>
+                </div>
+            )}
+
+            {accountType === 'platinum' && (
+                <div className='background'>
+                    <img src={platinum} alt="background" />
+                    <div className='background-whitefade'></div>
+                </div>
+            )}
+
+
+            <Container className='home-container '>
+                <div className='balance-container small'>
+                    {authContext.isLoggedIn && (
+                        <>
+                            <span>Welcome, <strong>{localStorage.getItem('nume')}</strong></span>
+                        </>
+                    )}
+                    <h1 className='headline'>Total Balance <sl-icon name="currency-exchange"></sl-icon></h1>
+                    <div className='line'></div>
+                    <div className='d-flex justify-content-center'>
+                        <h2 className='user-name coins'>{(balance).toFixed(2)} <p className=''> RON</p></h2>
+                        <h2 className='user-name coins'>
+                            {coins}
+                            <p className='d-flex align-items-center'>
+                                Coins <sl-icon name="coin" style={{ paddingLeft: '8px' }}></sl-icon>
+                            </p>
+                        </h2>
+                    </div>
+                    <br></br>
+                    <div className='d-flex button-container align-items-center justify-content-around quick'>
+                        <div className='group-button d-flex flex-column align-items-center' onClick={addMoney}>
+                            <div className='round-button d-flex'>
+                                <sl-icon name="plus" size="large" />
+                            </div>
+                            <p>Add</p>
+                        </div>
+
+                        <NavLink to='/transactions'>
+                            <div className='group-button d-flex flex-column align-items-center'>
+                                <div className='round-button d-flex'>
+                                    <sl-icon name="arrow-up-right"></sl-icon>
+                                </div>
+                                <p>Send</p>
+                            </div>
+                        </NavLink>
 
             <NavLink to="/transactions">
               <div className="group-button d-flex flex-column align-items-center">

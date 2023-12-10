@@ -1,0 +1,10 @@
+/* InfoCards.css */
+.card-img-top {
+  object-fit: cover; /* Ensure images cover the card top area */
+  height: 200px; /* Fixed height for images */
+}
+
+/* Ensures the text is vertically centered in the card body */
+.card-text {
+  text-align: left; /* Align text to the left within the centered flex container */
+}

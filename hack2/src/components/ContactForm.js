@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./ContactForm.css";
+import { Button } from "react-bootstrap";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -18,15 +19,15 @@ const ContactForm = () => {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Here you would typically send the data to a server
+  const handleSubmit = () => {
     console.log(formData);
   };
 
+
+
   return (
     <div className="contact-form-container">
-      <h2>HAVE YOU DECIDED?</h2>
+      <h2 className="headline">Contact us</h2>
       <p>
         Fill the form and we will contact you with all the information needed!
       </p>
@@ -67,26 +68,15 @@ const ContactForm = () => {
           onChange={handleChange}
         />
 
-        <label htmlFor="birthDate">Birth date (MM/YYYY)*</label>
-        <input
-          type="text"
-          id="birthDate"
-          name="birthDate"
-          placeholder="MM/YYYY"
-          required
-          onChange={handleChange}
-        />
-
         <div>
           <input type="checkbox" id="terms" name="terms" required />
           <label htmlFor="terms">
-            By checking this field I understand that BRD processes my personal
-            data in accordance with the mentions of the Information Note and I
-            have read the Terms and conditions of use of the BRD site.*
+            I agree to the <a href="/">Terms and Conditions</a>
           </label>
-        </div>
 
-        <button type="submit">APPLY ONLINE NOW</button>
+        </div>
+        <br></br>
+        <Button type="submit" id="but-2">Send</Button>
       </form>
     </div>
   );

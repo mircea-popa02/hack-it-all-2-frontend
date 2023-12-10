@@ -20,6 +20,8 @@ import GoldCard from "./GoldCard";
 import PlatinumCard from "./PlatinumCard";
 import ONGlist from "./ONGlist";
 
+import Footer from "./Footer";
+
 import GreenLoans from "./GreenLoans";
 
 import Swal from "sweetalert2";

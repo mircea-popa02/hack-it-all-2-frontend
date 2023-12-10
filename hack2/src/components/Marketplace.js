@@ -20,6 +20,8 @@ import GoldCard from "./GoldCard";
 import PlatinumCard from "./PlatinumCard";
 import ONGlist from "./ONGlist";
 
+import GreenLoans from "./GreenLoans";
+
 import Swal from "sweetalert2";
 
 import { useEffect, useState } from "react";
@@ -213,6 +215,9 @@ const Marketplace = () => {
           </Tab>
           <Tab eventKey="grants" title="Donate">
             <ONGlist />
+          </Tab>
+          <Tab eventKey="loans" title="Green loans">
+            <GreenLoans></GreenLoans>
           </Tab>
         </Tabs>
       </div>
